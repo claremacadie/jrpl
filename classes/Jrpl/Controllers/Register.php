@@ -142,7 +142,7 @@ class Register {
 			'permissions' => array_sum($_POST['permissions'] ?? [])
 		];
 		
-		$this-usersTable->save(user);
+		$this->usersTable->save(user);
 		
 		header('location: /user/list');
 		die();

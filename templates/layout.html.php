@@ -1,25 +1,25 @@
-<?php //doctype html?>
-<?php //This files sets the layout for the jokedatabase website using the jokes.css file?>
-<?php //Make sure jokes.css is in the same directory as index.php?>
+<?php // doctype html?>
+<?php // This files sets the layout for the jrpl website using the jrpl.css file?>
+<?php // Make sure jrpl.css is in the same directory as index.php?>
 <html>
 	<head>
 	  <meta charset="utf-8">
-	  <link rel="stylesheet" href="/jokes.css">
+	  <link rel="stylesheet" href="/jrpl.css">
 	  <title><?=$title?></title>
 	</head>
 	<body> 
 		<header>
-			<h1> Internet Joke Database</h1>
+			<h1> Julian Rimet Prediction League</h1>
 		</header>
 		<nav>
 			<ul>
 				<li><a href="/">Home</a></li>
-				<li><a href="/joke/list">Jokes list</a></li>
-				<li><a href="/joke/edit">Add a new joke</a></li>
+				<li><a href="/match/list">Matches list</a></li>
+				<li><a href="/match/edit">Add a new match</a></li>
 					
-				<?php //This displays a logout option when a user is logged in and and login option when they are not logged in?>
-				<?php //Administer categories and users is only shown if logged in user has permission to edit these?>
-				<?php if ($loggedIn): ?>
+				<?php // This displays a logout option when a user is logged in and and login option when they are not logged in?>
+				<?php // Administer categories and users is only shown if logged in user has permission to edit these?>
+				<? /*php if ($loggedIn): ?>
 					
 					<?php if ($user->hasPermission(\Ijdb\Entity\Author::EDIT_CATEGORIES)): ?>
 						<li><a href="/category/list">Administer categories</a></li>
@@ -33,7 +33,7 @@
 					
 				<?php else: ?>
 					<li><a href="/login">Log in</a></li>
-				<?php endif; ?>
+				<?php endif; */?>
 	
 			</ul>
 		</nav>
@@ -43,7 +43,7 @@
 		</main>
 		
 		<footer>
-			&copy; IJDB 2019
+			&copy; JRPL 2019
 		</footer>	
 	</body>
 
