@@ -16,6 +16,7 @@
 				<li><a href="/">Home</a></li>
 				<li><a href="/match/list">Matches list</a></li>
 				<li><a href="/match/edit">Add a new match</a></li>
+				<li><a href="/user/list">Administer users</a></li>
 					
 				<?php // This displays a logout option when a user is logged in and and login option when they are not logged in?>
 				<?php // Administer categories and users is only shown if logged in user has permission to edit these?>

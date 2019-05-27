@@ -14,22 +14,6 @@
 // When they are subsquently called either as a type hint or when creating new objects
 // they are referred to like this: \Ninja\
 
-/*try {
-	// Retrieve password and username from apache environment
-	// (This prevents the username and password appearing in files on gitHub)>
-	$password = getenv('db_password');
-	$user = getenv('db_user');
-
-	$pdo = new PDO('mysql:host=127.0.0.1;dbname=jrpl;
-	charset=utf8', $user, $password);
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$output = 'Database connection established';
-} catch (PDOException $error) {
-	$output = 'Unable to connect to the database server: ' . $error;
-}
-
-include __DIR__ . '/../templates/layout.html.php';
-*/
 try {
 	// include calls the file
 	// '/../' tells it to go up once from the directory it is in to find 'includes'

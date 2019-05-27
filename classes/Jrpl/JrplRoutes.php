@@ -10,7 +10,7 @@ namespace Jrpl;
 // Implements the type hinting defined in Routes.php
 // This ensures the correct formats are used as inputs
 class JrplRoutes implements \Ninja\Routes {	
-	//private $usersTable;
+	private $usersTable;
 	//private $teamsTable;
 	//private $matchesTable;
 	//private $predictionsTable;
@@ -20,7 +20,7 @@ class JrplRoutes implements \Ninja\Routes {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
 		// Create instances of DatabaseTables for the users, teams, matches and predictions tables
-		//$this->usersTable = new \Ninja\DatabaseTable($pdo, 'users', 'id', '\Jrpl\Entity\User', [&$this->usersTable]);
+		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'users', 'id', '\Jrpl\Entity\User', [&$this->usersTable]);
 		//$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'teams', 'id', '\Jrpl\Entity\Team', [&$this->teamsTable]);
 		//$this->matchesTable = new \Ninja\DatabaseTable($pdo, 'matches', 'id', '\Jrpl\Entity\Match', [&$this->matchesTable]);
 		//$this->predictionsTable = new \Ninja\DatabaseTable($pdo, 'predictions', 'id', '\Jrpl\Entity\Prediction', [&$this->predictionsTable]);
@@ -31,13 +31,13 @@ class JrplRoutes implements \Ninja\Routes {
 
 	// This method creates $routes to enable URLs and request methods (_GET or _POST) to determine which method of which controller will be run
 	// It uses type hinting to ensure it is array
-	/*public function getRoutes(): array {
-		//Create instance of controllers
+	public function getRoutes(): array {
+		// Create instance of controllers
 		$userController = new \Jrpl\Controllers\Register($this->usersTable);
-		$teamController = new \Jrpl\Controllers\Team($this->teamsTable);
-		$loginController = new \Jrpl\Controllers\Login($this->authentication);
-		$matchController = new \Jrpl\Controllers\Match($this->matchesTable);
-		$predictionController = new \Jrpl\Controllers\Prediction($this->predicitonsTable);
+		//$teamController = new \Jrpl\Controllers\Team($this->teamsTable);
+		//$loginController = new \Jrpl\Controllers\Login($this->authentication);
+		//$matchController = new \Jrpl\Controllers\Match($this->matchesTable);
+		//$predictionController = new \Jrpl\Controllers\Prediction($this->predicitonsTable);
 		
 		
 		// These routes appear in the address bar of the browser
@@ -157,7 +157,7 @@ class JrplRoutes implements \Ninja\Routes {
 		// Set the output of this function to be $routes
 		// This array will contain the appropriate action, depending on the controller it is paired with
 		return $routes;		
-	}*/
+	}
 
 	// This method returns an authentication object defined by Authentication.php
 	// It uses type hinting to ensure it is a Ninja/Authentication object
