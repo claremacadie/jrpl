@@ -9,7 +9,7 @@
 	</head>
 	<body> 
 		<header>
-			<h1> Internet Joke Database</h1>
+			<h1> Julian Rimet Prediction League</h1>
 		</header>
 		<nav>
 			<ul>
@@ -43,7 +43,7 @@
 		</main>
 		
 		<footer>
-			&copy; IJDB 2019
+			&copy; JRPL 2019
 		</footer>	
 	</body>
 

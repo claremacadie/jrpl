@@ -1,3 +1,1 @@
-<h2>Internet Joke Database</h2>
-
-<p>Welcome to the Internet Joke Database</p>
+<h2>Welcome to the Julian Rimet Prediction League</h2>
