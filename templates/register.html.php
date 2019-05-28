@@ -17,14 +17,15 @@
 <?php //This creates the form to register users?>
 <?php //'value = ....' this fills the input boxes with the value $user[name/email/password] if set, otherwise leave blank?>
 <?php //i.e. when there is an error filling in these boxes, the page reloads with the information filled in that was already entered by the user?>
+<?php //"userName", [userName] and 'userName' are all required to match the name of the username column in the database?>
 <form action="" method="post">
 
 	<label for="email">Your email address</label>
 	<input name="user[email]" id="email" type="text" value="<?=$user['email'] ?? ''?>">
 	
 
-	<label for="name">Your name</label>
-	<input name="user[name]" id="name" type="text" value="<?=$user['name'] ?? ''?>">
+	<label for="userName">Your name</label>
+	<input name="user[userName]" id="userName" type="text" value="<?=$user['userName'] ?? ''?>">
 
 	<label for="password">Password</label>
 	<input name="user[password]" id="password" type="password" value="<?=$user['password'] ?? ''?>">
