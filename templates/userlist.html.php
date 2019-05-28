@@ -1,4 +1,5 @@
-<?php //Template for the user list?>
+<?php // Template for the user list?>
+<?php // $user->userName, userName is the title of the column in the database?>
 
 <h2>User List</h2>
 
@@ -12,7 +13,7 @@
 	<body>
 		<?php foreach ($users as $user): ?>
 		<tr>
-			<td><?=$user->name;?></td>
+			<td><?=$user->userName;?></td>
 			<td><?=$user->email;?></td>
 			<td>
 				<a href="/user/permissions?id=<?=$user->id;?>">Edit Permissions</a>

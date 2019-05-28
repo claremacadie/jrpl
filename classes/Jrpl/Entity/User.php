@@ -8,7 +8,7 @@ namespace Jrpl\Entity;
 
 class user {
 	public $id;
-	public $name;
+	public $userName;
 	public $email;
 	public $password;
 	private $jokesTable;

@@ -44,7 +44,7 @@ class Register {
 		// But if any of the fields have been left blank set $valid to false
 		// $errors[] = means each error will be added to the end of the errors array so
 		// all the error messages will be stored in $errors
-		// 'userName' is the column name in the database
+		// 'userName' is the title of the column in the database
 		if (empty($user['userName'])) {
 			$valid = false;
 			$errors[] = 'Name cannot be blank';
