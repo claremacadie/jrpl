@@ -68,7 +68,7 @@ class EntryPoint {
 		// the user is not logged in, then
 		// redirect to the login error page
 		
-		/*if (isset($routes[$this->route]['login']) && 
+		if (isset($routes[$this->route]['login']) && 
 			($routes[$this->route]['login'] == true) &&
 			!$authentication->isLoggedIn()) {				
 				header('location: /login/error');
@@ -86,7 +86,7 @@ class EntryPoint {
 				die();
 			
 		// otherwise if the user is logged in, define $controller, $action, $page and $title using the $routes variables
-		} else {*/
+		} else {
 			$controller = $routes[$this->route][$this->method]['controller'];
 			$action = $routes[$this->route][$this->method]['action'];
 			$page = $controller->$action();
@@ -104,7 +104,7 @@ class EntryPoint {
 			
 			// Get the currently logged in user to enable the layout template to check permissions for displaying administer users and categories
 			$user = $authentication->getUser();
-		 
+		} 
 		
 		// This file contains the layout information and uses $title and $output defined above
 		// The input 'loggedIn' => $authentication->isLoggedIn() keeps track of whether a user is logged in
