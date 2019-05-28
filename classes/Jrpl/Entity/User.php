@@ -28,14 +28,14 @@ class User {
 	
 	// This method retrieves jokes from the database where the userId matches the id of this Prediction class
 	public function getPredictions() {
-		return $this->predictionsTable->find('userId', $this->id);
+		return $this->predictionsTable->find('id', $this->id);
 	}
 	
 	// This method adds predictions to the database using the save method (defined in DatabaseTable)
 	// It sets the userId of the prediction to be added as the id of this User class
 	// and return enables the value of the save method to be output when this method is used
 	public function addPrediction($prediction) {
-		$prediction['userId'] = $this->id;
+		$prediction['id'] = $this->id;
 		return $this->predictionsTable->save($prediction);
 	}
 	

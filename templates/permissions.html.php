@@ -1,6 +1,6 @@
-<?php //This file produces the html code for a page to edit a user's permissions ?>
+<?php // This file produces the html code for a page to edit a user's permissions ?>
 
-<h2>Edit <?=$author->name?>'s Permissions</h2>
+<h2>Edit <?=$user->name?>'s Permissions</h2>
 
 <form action ="" method="post">
 	<?php foreach ($permissions as $name => $value):?>
@@ -9,7 +9,7 @@
 			name="permissions[]"
 			type="checkbox"
 			value="<?=$value?>"
-			<?php if ($author->hasPermission($value)): echo 'checked';?> 
+			<?php if ($user->hasPermission($value)): echo 'checked';?> 
 			<?php endif;?>
 		/>
 		<label><?=$name?>

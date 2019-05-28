@@ -61,7 +61,7 @@ class EntryPoint {
 		$routes = $this->routes->getRoutes();
 		
 		// Define $authentication as the output of getAuthentication
-		//$authentication = $this->routes->getAuthentication();
+		$authentication = $this->routes->getAuthentication();
 		
 		// If login is set, and 
 		// it's set to true, and 
@@ -103,16 +103,16 @@ class EntryPoint {
 			}
 			
 			// Get the currently logged in user to enable the layout template to check permissions for displaying administer users and categories
-			//$user = $authentication->getUser();
+			$user = $authentication->getUser();
 		 
 		
 		// This file contains the layout information and uses $title and $output defined above
 		// The input 'loggedIn' => $authentication->isLoggedIn() keeps track of whether a user is logged in
 		// echo means these outputs are sent to the browser
 		echo $this->loadTemplate('layout.html.php', [
-			//'loggedIn' => $authentication->isLoggedIn(),
-			'output' => $output/*,
+			'loggedIn' => $authentication->isLoggedIn(),
+			'output' => $output,
 			'title' => $title,
-			'user' => $user*/]);
+			'user' => $user]);
 	}
 }

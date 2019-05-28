@@ -14,7 +14,7 @@ class JrplRoutes implements \Ninja\Routes {
 	//private $teamsTable;
 	//private $matchesTable;
 	//private $predictionsTable;
-	//private $authentication;
+	private $authentication;
 	
 	public function __construct() {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
@@ -26,7 +26,7 @@ class JrplRoutes implements \Ninja\Routes {
 		//$this->predictionsTable = new \Ninja\DatabaseTable($pdo, 'predictions', 'id', '\Jrpl\Entity\Prediction', [&$this->predictionsTable]);
 		
 		// Create an instance of the Authentication class
-		//$this->authentication = new \Ninja\Authentication($this->usersTable, 'email', 'password');		
+		$this->authentication = new \Ninja\Authentication($this->usersTable, 'email', 'password');		
 	}
 
 	// This method creates $routes to enable URLs and request methods (_GET or _POST) to determine which method of which controller will be run
@@ -35,7 +35,7 @@ class JrplRoutes implements \Ninja\Routes {
 		// Create instance of controllers
 		$userController = new \Jrpl\Controllers\Register($this->usersTable);
 		//$teamController = new \Jrpl\Controllers\Team($this->teamsTable);
-		//$loginController = new \Jrpl\Controllers\Login($this->authentication);
+		$loginController = new \Jrpl\Controllers\Login($this->authentication);
 		//$matchController = new \Jrpl\Controllers\Match($this->matchesTable);
 		//$predictionController = new \Jrpl\Controllers\Prediction($this->predicitonsTable);
 		
@@ -161,18 +161,18 @@ class JrplRoutes implements \Ninja\Routes {
 
 	// This method returns an authentication object defined by Authentication.php
 	// It uses type hinting to ensure it is a Ninja/Authentication object
-	/*public function getAuthentication(): \Ninja\Authentication {
+	public function getAuthentication(): \Ninja\Authentication {
 		return $this->authentication;
-	}*/
+	}
 	
 	// This method fetches the current logged-in user and checks if they have a specific permission
 	// Check user is defined and their permissions match the relevant permission
-	/*public function checkPermission($permission): bool {
+	public function checkPermission($permission): bool {
 		$user = $this->authentication->getUser();
 		if ($user && $user->hasPermission($permission)) {
 			return true;
 		} else {
 			return false;
 		}
-	}*/
+	}
 }

@@ -34,9 +34,9 @@ try {
 } catch (PDOException $error) {
 	$title = 'An error has occurred';
 	
-	$output = 'Unable to connect to the database server: ';	 //. 
-		//$error->getMessage() . ' in ' .
-		//$error->getFile() . ':' . $error->getLine();
+	$output = 'Unable to connect to the database server: ' . 
+		$error->getMessage() . ' in ' .
+		$error->getFile() . ':' . $error->getLine();
 
 	// This file contains the layout information and uses $title and $output defined above
 	include __DIR__ . '/../templates/layout.html.php';
