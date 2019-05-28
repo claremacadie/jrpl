@@ -17,7 +17,7 @@ class User {
 	const EDIT_TEAMS = 1;
 	const DELETE_TEAMS = 2;
 	const LIST_MATCHES = 4;
-	const EDIT_CMATCHES = 8;
+	const EDIT_MATCHES = 8;
 	const REMOVE_MATCHES = 16;
 	const EDIT_USER_ACCESS = 32;	
 	

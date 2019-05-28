@@ -56,20 +56,19 @@ class EntryPoint {
 	// $routes is basically the method (_GET or _POST) and the URL
 	// $authentication is created by getAuthentication, with is defined in JRplRoutes
 	public function run() {
-		$output = "hello world";
-		/*
+		
 		// Define $routes as the output of getRoutes
 		$routes = $this->routes->getRoutes();
 		
 		// Define $authentication as the output of getAuthentication
-		$authentication = $this->routes->getAuthentication();
+		//$authentication = $this->routes->getAuthentication();
 		
 		// If login is set, and 
 		// it's set to true, and 
 		// the user is not logged in, then
 		// redirect to the login error page
 		
-		if (isset($routes[$this->route]['login']) && 
+		/*if (isset($routes[$this->route]['login']) && 
 			($routes[$this->route]['login'] == true) &&
 			!$authentication->isLoggedIn()) {				
 				header('location: /login/error');
@@ -87,7 +86,7 @@ class EntryPoint {
 				die();
 			
 		// otherwise if the user is logged in, define $controller, $action, $page and $title using the $routes variables
-		} else {
+		} else {*/
 			$controller = $routes[$this->route][$this->method]['controller'];
 			$action = $routes[$this->route][$this->method]['action'];
 			$page = $controller->$action();
@@ -100,21 +99,20 @@ class EntryPoint {
 				$output = $this->loadTemplate($page['template'], $page['variables']);
 			// Otherwise, just pass $page['template'] to loadTemplate	
 			} else {
-				//$output = $this->loadTemplate($page['template']);
-				$output = "hello world";
+				$output = $this->loadTemplate($page['template']);
 			}
 			
 			// Get the currently logged in user to enable the layout template to check permissions for displaying administer users and categories
-			$user = $authentication->getUser();
-		} */
+			//$user = $authentication->getUser();
+		 
 		
 		// This file contains the layout information and uses $title and $output defined above
 		// The input 'loggedIn' => $authentication->isLoggedIn() keeps track of whether a user is logged in
 		// echo means these outputs are sent to the browser
 		echo $this->loadTemplate('layout.html.php', [
 			//'loggedIn' => $authentication->isLoggedIn(),
-			'output' => $output]); //,
-			//'title' => $title,
-			//'user' => $user]);
+			'output' => $output/*,
+			'title' => $title,
+			'user' => $user*/]);
 	}
 }

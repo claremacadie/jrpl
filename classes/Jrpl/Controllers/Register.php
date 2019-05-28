@@ -111,7 +111,7 @@ class Register {
 			'template' => 'userlist.html.php',
 			'title' => 'User list',
 			'variables' => [
-				'authors' => $users
+				'users' => $users
 			]
 		];
 	}
