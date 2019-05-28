@@ -21,12 +21,12 @@
 				<?php //Administer categories and users is only shown if logged in user has permission to edit these?>
 				<?php if ($loggedIn): ?>
 					
-					<?php if ($user->hasPermission(\Jrpl\Entity\Author::EDIT_CATEGORIES)): ?>
+					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_CATEGORIES)): ?>
 						<li><a href="/category/list">Administer categories</a></li>
 					<?php endif; ?>
 					
-					<?php if ($user->hasPermission(\Jrpl\Entity\Author::EDIT_USER_ACCESS)): ?>
-						<li><a href="/author/list">Administer authors</a></li>
+					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_USER_ACCESS)): ?>
+						<li><a href="/user/list">Administer users</a></li>
 					<?php endif; ?>
 											
 					<li><a href="/logout">Log out</a></li>

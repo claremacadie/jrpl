@@ -10,7 +10,7 @@ namespace Jrpl;
 //Implements the type hinting defined in Routes.php
 //This ensures the correct formats are used as inputs
 class JrplRoutes implements \Ninja\Routes {	
-	private $authorsTable;
+	private $usersTable;
 	private $jokesTable;
 	private $categoriesTable;
 	private $jokeCategoriesTable;
@@ -19,9 +19,9 @@ class JrplRoutes implements \Ninja\Routes {
 	public function __construct() {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
-		//Create instances of DatabaseTables for the joke, author and joke category tables
-		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'id', '\Jrpl\Entity\Joke', [&$this->authorsTable, &$this->jokeCategoriesTable]);
-		$this->authorsTable = new \Ninja\DatabaseTable($pdo, 'author', 'id', '\Jrpl\Entity\Author', [&$this->jokesTable]);
+		//Create instances of DatabaseTables for the joke, user and joke category tables
+		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'id', '\Jrpl\Entity\Joke', [&$this->usersTable, &$this->jokeCategoriesTable]);
+		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'id', '\Jrpl\Entity\user', [&$this->jokesTable]);
 		$this->categoriesTable = new \Ninja\DatabaseTable($pdo, 'category', 'id', '\Jrpl\Entity\Category', [&$this->jokesTable, &$this->jokeCategoriesTable]);
 		
 		//Create instance of DatabaseTables for the joke_category table, 
@@ -29,15 +29,15 @@ class JrplRoutes implements \Ninja\Routes {
 		$this->jokeCategoriesTable = new \Ninja\DatabaseTable($pdo, 'joke_category', 'categoryId');	
 			
 		//Create an instance of the Authentication class
-		$this->authentication = new \Ninja\Authentication($this->authorsTable, 'email', 'password');		
+		$this->authentication = new \Ninja\Authentication($this->usersTable, 'email', 'password');		
 	}
 
 	//This method creates $routes to enable URLs and request methods (_GET or _POST) to determine which method of which controller will be run
 	//It uses type hinting to ensure it is array
 	public function getRoutes(): array {
 		//Create instance of controllers
-		$jokeController = new \Jrpl\Controllers\Joke($this->jokesTable, $this->authorsTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);
-		$authorController = new \Jrpl\Controllers\Register($this->authorsTable);
+		$jokeController = new \Jrpl\Controllers\Joke($this->jokesTable, $this->usersTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);
+		$userController = new \Jrpl\Controllers\Register($this->usersTable);
 		$loginController = new \Jrpl\Controllers\Login($this->authentication);
 		$categoryController = new \Jrpl\Controllers\Category($this->categoriesTable);
 		
@@ -71,17 +71,17 @@ class JrplRoutes implements \Ninja\Routes {
 					'controller' => $jokeController, 
 					'action' => 'home']],
 					
-			'author/register' => [
+			'user/register' => [
 				'GET' => [
-					'controller' => $authorController, 
+					'controller' => $userController, 
 					'action' => 'registrationForm'],
 				'POST' => [
-					'controller' => $authorController, 
+					'controller' => $userController, 
 					'action' => 'registerUser']],
 									
-			'author/success' => [
+			'user/success' => [
 				'GET' => [
-					'controller' => $authorController, 
+					'controller' => $userController, 
 					'action' => 'success']],			
 			
 			'login' => [
@@ -116,42 +116,42 @@ class JrplRoutes implements \Ninja\Routes {
 					'controller' => $categoryController, 
 					'action' => 'edit'],
 				'login' => true,
-				'permissions' => \Jrpl\Entity\Author::EDIT_CATEGORIES],
+				'permissions' => \Jrpl\Entity\user::EDIT_CATEGORIES],
 			
 			'category/delete' => [
 				'POST' => [
 					'controller' => $categoryController, 
 					'action' => 'delete'],
 				'login' => true,
-				'permissions' => \Jrpl\Entity\Author::REMOVE_CATEGORIES],
+				'permissions' => \Jrpl\Entity\user::REMOVE_CATEGORIES],
 				
 			'category/list' => [
 				'GET' => [
 					'controller' => $categoryController, 
 					'action' => 'list'],
 				'login' => true,
-				'permissions' => \Jrpl\Entity\Author::LIST_CATEGORIES],
+				'permissions' => \Jrpl\Entity\user::LIST_CATEGORIES],
 					
-			'author/permissions' => [
+			'user/permissions' => [
 				'GET' => [
-					'controller' => $authorController, 
+					'controller' => $userController, 
 					'action' => 'permissions'],
 				'POST' => [
-					'controller' => $authorController, 
+					'controller' => $userController, 
 					'action' => 'savePermissions'],
 				'login' => true,
-				'permissions' => \Jrpl\Entity\Author::EDIT_USER_ACCESS],
+				'permissions' => \Jrpl\Entity\user::EDIT_USER_ACCESS],
 				
-			'author/list' => [
+			'user/list' => [
 				'GET' => [
-					'controller' => $authorController,
+					'controller' => $userController,
 					'action' => 'list'],
 				'login' => true,
-				'permissions' => \Jrpl\Entity\Author::EDIT_USER_ACCESS],
+				'permissions' => \Jrpl\Entity\user::EDIT_USER_ACCESS],
 				
 			'permissions/error' => [
 				'GET' => [
-					'controller' => $authorController,
+					'controller' => $userController,
 					'action' => 'error']]
 		];	
 		

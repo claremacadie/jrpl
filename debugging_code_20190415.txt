@@ -1,5 +1,5 @@
 //echo(print_r($joke));
-//echo(print_r($author));
+//echo(print_r($user));
 //die();		
 
 

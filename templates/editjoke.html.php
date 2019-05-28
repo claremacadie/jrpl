@@ -1,9 +1,9 @@
-<?php //Only display this edit form if the userId of the logged in user matches the joke's authorId?>
+<?php //Only display this edit form if the userId of the logged in user matches the joke's userId?>
 <?php //|| (or) if the jokeid is null, then we're posting a new joke, so anyone can see the edit form,?>
 <?php //or if the user has permission to edit jokes?>
 <?php //Otherwise, display a message saying they can't edit the joke?>
 
-<?php if (empty($joke->id) || $user->id == $joke->authorId || $user->hasPermission(\Jrpl\Entity\Author::EDIT_JOKES)):?>
+<?php if (empty($joke->id) || $user->id == $joke->userId || $user->hasPermission(\Jrpl\Entity\user::EDIT_JOKES)):?>
 
 	<form 
 		action="" 

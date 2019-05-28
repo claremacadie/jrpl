@@ -18,28 +18,28 @@
 		<p><?=$totalJokes?> jokes in the <?=$currentCategory->name?> category have been submitted to the Internet Joke Database.</p>
 	<?php endif; ?>
 	
-	<?php //Output a list of jokes with an email link for the author, date (formatted to 1st april 2019), edit link and delete button?>
+	<?php //Output a list of jokes with an email link for the user, date (formatted to 1st april 2019), edit link and delete button?>
 	<?php foreach ($jokes as $joke): ?>
 		<blockquote>
 			<?=(new \Ninja\Markdown($joke->jokeText))->toHtml()?>
-			(by <a href="mailto:<?php echo htmlspecialchars($joke->getAuthor()->email, ENT_QUOTES, 'UTF-8'); ?>">
-			<?=htmlspecialchars($joke->getAuthor()->name, ENT_QUOTES, 'UTF-8'); ?>
+			(by <a href="mailto:<?php echo htmlspecialchars($joke->getuser()->email, ENT_QUOTES, 'UTF-8'); ?>">
+			<?=htmlspecialchars($joke->getuser()->name, ENT_QUOTES, 'UTF-8'); ?>
 			</a> 
 			on <?php $date = new DateTime($joke->jokeDate); echo $date->format('jS F Y'); ?>)
 			
-			<?php //When a user is logged in, if their userId matches the authorId of a joke, ?>
+			<?php //When a user is logged in, if their userId matches the userId of a joke, ?>
 			<?php //Or if the user has permissions to edit or delete jokes, ?>
 			<?php //the edit and delete actions are available?>
 			<?php //Otherwise, just the joke is listed?>	
 			<?php if ($user): ?>
 			
-				<?php if ($user->id  == $joke->authorId || $user->hasPermission(\Jrpl\Entity\Author::EDIT_JOKES)): ?>
+				<?php if ($user->id  == $joke->userId || $user->hasPermission(\Jrpl\Entity\user::EDIT_JOKES)): ?>
 					<a href ="/joke/edit?id=<?=$joke->id?>">
 					Edit
 					</a>
 				<?php endif; ?>
 				
-				<?php if ($user->id  == $joke->authorId || $user->hasPermission(\Jrpl\Entity\Author::DELETE_JOKES)): ?>
+				<?php if ($user->id  == $joke->userId || $user->hasPermission(\Jrpl\Entity\user::DELETE_JOKES)): ?>
 					 <form action="/joke/delete" method="post">
 						<input type="hidden" name="id" value="<?=$joke->id?>">
 						<input type="submit" value="Delete">

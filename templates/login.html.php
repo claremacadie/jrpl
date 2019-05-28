@@ -17,5 +17,5 @@ if (isset($error)) {
 </form>
 
 <p>Don't have an account? 
-	<a href="\author\register">Click here to register an account</a>
+	<a href="\user\register">Click here to register an account</a>
 </p>

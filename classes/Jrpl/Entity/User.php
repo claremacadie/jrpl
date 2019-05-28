@@ -1,12 +1,12 @@
 <?php
 
-//This file creates an entity class 'Author'
-//This enables methods to be called on the $author instance, e.g. $author->addJoke($joke);
-//For this to work, $author needs to be an object, rather than an array, which is what this file does
+//This file creates an entity class 'user'
+//This enables methods to be called on the $user instance, e.g. $user->addJoke($joke);
+//For this to work, $user needs to be an object, rather than an array, which is what this file does
 
 namespace Jrpl\Entity;
 
-class Author {
+class user {
 	public $id;
 	public $name;
 	public $email;
@@ -26,16 +26,16 @@ class Author {
 		$this->jokesTable = $jokesTable;
 	}
 	
-	//This method retrieves jokes from the database where the authorId matches the id of this Author class
+	//This method retrieves jokes from the database where the userId matches the id of this user class
 	public function getJokes() {
-		return $this->jokesTable->find('authorId', $this->id);
+		return $this->jokesTable->find('userId', $this->id);
 	}
 	
 	//This method adds jokes to the database using the save method (defined in DatabaseTable)
-	//It sets the authorId of the joke to be added as the id of this Author class
+	//It sets the userId of the joke to be added as the id of this user class
 	//and return enables the value of the save method to be output when this method is used
 	public function addJoke($joke) {
-		$joke['authorId'] = $this->id;
+		$joke['userId'] = $this->id;
 		return $this->jokesTable->save($joke);
 	}
 	

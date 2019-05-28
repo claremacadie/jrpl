@@ -12,20 +12,20 @@ use \Ninja\Authentication;
 
 class Joke {
 	private $jokesTable;
-	private $authorsTable;
+	private $usersTable;
 	private $categoriesTable;
 	private $jokeCategoriesTable;
 	private $authentication;
 	
-	//This constructs JokeController, with the jokesTable and authorsTable 
+	//This constructs JokeController, with the jokesTable and usersTable 
 	//When a JokeController class is created, __construct tells it that 
 	//$jokesTable is an input and it must be a DatabaseTable, and
-	//$authorsTable is an input and it must be a DatabaseTable, and
+	//$usersTable is an input and it must be a DatabaseTable, and
 	//$authentication is an input and it must be an Authentication object
 	
-	public function __construct(DatabaseTable $jokesTable, DatabaseTable $authorsTable, DatabaseTable $categoriesTable, DatabaseTable $jokeCategoriesTable, Authentication $authentication) {
+	public function __construct(DatabaseTable $jokesTable, DatabaseTable $usersTable, DatabaseTable $categoriesTable, DatabaseTable $jokeCategoriesTable, Authentication $authentication) {
 		$this->jokesTable = $jokesTable;
-		$this->authorsTable = $authorsTable;
+		$this->usersTable = $usersTable;
 		$this->categoriesTable = $categoriesTable;
 		$this->jokeCategoriesTable = $jokeCategoriesTable;
 		$this->authentication = $authentication;
@@ -78,15 +78,15 @@ class Joke {
 	//This method deletes joke with matching id and sends the browser to the jokes list page
 	public function delete() {
 		
-		//Set $author to the logged in user
-		$author = $this->authentication->getUser();
+		//Set $user to the logged in user
+		$user = $this->authentication->getUser();
 		
 		//Set $joke to the joke in the database matching the id, using findById
 		$joke = $this->jokesTable->findById($_POST['id']);
 		
-		//If the authorId of the joke does not match the author['id'] of the user
+		//If the userId of the joke does not match the user['id'] of the user
 		//return leaves this method so that the code below is not executed and the joke is not deleted
-		if ($joke->authorId != $author->id && !$author->hasPermission(\Jrpl\Entity\Author::DELETE_JOKES)) {
+		if ($joke->userId != $user->id && !$user->hasPermission(\Jrpl\Entity\user::DELETE_JOKES)) {
 			return;
 		}
 		
@@ -106,8 +106,8 @@ class Joke {
 	//This method saves changes to the joke database
 	public function saveEdit() {
 	
-		//Set $author to the logged in user
-		$author = $this->authentication->getUser();
+		//Set $user to the logged in user
+		$user = $this->authentication->getUser();
 
 		//Set $joke to the text posted
  		$joke = $_POST['joke'];
@@ -119,12 +119,12 @@ class Joke {
 		$joke['jokeDate'] = new \DateTime();
 		
 		//Create a joke entity instance to enable joke categories to be passed back to the database
-		//addJoke is defined in Author.php, which uses the save method defined in DatabaseTables, 
+		//addJoke is defined in user.php, which uses the save method defined in DatabaseTables, 
 		//which creates an entity of the class being saved (in this case, a joke entity)
 		//Use the clearCategories method in the joke entity to remove all records from the joke_category table,
 		//before using the addCategory method in the joke entity to add the many-many relationships in the joke_category table
 		//(this is easier than checking for which need to be unchecked)
-		$jokeEntity = $author->addJoke($joke);
+		$jokeEntity = $user->addJoke($joke);
 		$jokeEntity->clearCategories();
 		foreach ($_POST['category'] as $categoryId) {
 			$jokeEntity->addCategory($categoryId);
@@ -148,8 +148,8 @@ class Joke {
 	//findById is defined in DatabaseTable.php
 	public function edit(){
 		
-		//Set $author to the logged in user
-		$author = $this->authentication->getUser();
+		//Set $user to the logged in user
+		$user = $this->authentication->getUser();
 
 		//Use the findAll method (in DatabaseTable) to get a list of categories
 		//These are passed to the template
@@ -167,7 +167,7 @@ class Joke {
 			'title' => $title,
 			'variables' => [
 				'joke' => $joke ?? null,
-				'user' => $author,
+				'user' => $user,
 				'categories' => $categories
 			]	
 		];

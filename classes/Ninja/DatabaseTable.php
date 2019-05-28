@@ -171,7 +171,7 @@ class DatabaseTable {
 
 	//This method inserts a record in any database table
 	//The query it creates looks like:
-	//INSERT INTO `joke` (`joketext`, `jokedate`, `authorId`) VALUES (:joketext, :DateTime, :authorId);
+	//INSERT INTO `joke` (`joketext`, `jokedate`, `userId`) VALUES (:joketext, :DateTime, :userId);
 	private function insert($fields) {
 		$sql = 'INSERT INTO `' . $this->table . '` (';
 		
@@ -206,7 +206,7 @@ class DatabaseTable {
 
 	//This method updates a record in any database table
 	//The query it creates looks like:
-	//UPDATE `joke` SET `joketext` = :joketext, `jokedate` = :DateTime, `authorId` = :authorId) WHERE `primaryKey` = :1;
+	//UPDATE `joke` SET `joketext` = :joketext, `jokedate` = :DateTime, `userId` = :userId) WHERE `primaryKey` = :1;
 	private function update($fields) {
 		
 		$sql = 'UPDATE `' . $this->table . '` SET ';
@@ -240,7 +240,7 @@ class DatabaseTable {
 	
 	//This method deletes records from any database table, where a particular column is equal to a particular value
 	//The query it creates looks like:
-	//DELETE FROM `joke` WHERE `authorId` = :1;
+	//DELETE FROM `joke` WHERE `userId` = :1;
 	public function deleteWhere($column, $value) {
 		$sql = 'DELETE FROM `' . $this->table . '` WHERE `' . $column . '` = :value';
 		$parameters = ['value' => $value];
