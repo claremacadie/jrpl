@@ -1,7 +1,7 @@
 <?php
 //This creates a category entity with associated methods
 
-namespace Ijdb\Entity;
+namespace Jrpl\Entity;
 
 use Ninja\DatabaseTable;
 

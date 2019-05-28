@@ -52,9 +52,9 @@ class EntryPoint {
 	}
 
 	//This method defines $title and $output dependent on $routes and $authentication
-	//$routes is created by getRoutes, which is defined in IjdbRoutes
+	//$routes is created by getRoutes, which is defined in JrplRoutes
 	//$routes is basically the method (_GET or _POST) and the URL
-	//$authentication is created by getAuthentication, with is defined in IjdbRoutes
+	//$authentication is created by getAuthentication, with is defined in JrplRoutes
 	public function run() {
 		//Define $routes as the output of getRoutes
 		$routes = $this->routes->getRoutes();
@@ -78,7 +78,7 @@ class EntryPoint {
 				die();
 		
 		//Check for relevant permission of logged in user
-		//checkPermission is defined in IjdbRoutes
+		//checkPermission is defined in JrplRoutes
 		} else if (isset($routes[$this->route]['permissions']) && 
 			!$this->routes->checkPermission($routes[$this->route]['permissions'])) {
 				header('location: /permissions/error');

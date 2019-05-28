@@ -2,7 +2,7 @@
 
 //This is the category controller
 
-namespace Ijdb\Controllers;
+namespace Jrpl\Controllers;
 
 class Category {
 	private $categoriesTable;

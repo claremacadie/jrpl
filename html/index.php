@@ -1,8 +1,8 @@
 <?php
 
-//This file is the main entry point to the website and uses EntryPoint.php and IjdbRoutes.php
+//This file is the main entry point to the website and uses EntryPoint.php and JrplRoutes.php
 //EntryPoint.php is generic code for accessing websites
-//IjdbRoute.php is speccific code for accessing the joke database
+//JrplRoute.php is speccific code for accessing the joke database
 //These files are called by including autoload.php
 //autoload.php loads class files when a class is used for the first time
 //Be aware, an extra file not in the book is required to get everything working
@@ -24,11 +24,11 @@ try {
 	$route = ltrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 		
 	//This sets up a new object called EntryPoint 
-	//with inputs $route, $method (_GET or _POST) and $routes (defined by IjdbRoutes)
+	//with inputs $route, $method (_GET or _POST) and $routes (defined by JrplRoutes)
 	//The run method is defined in EntryPoint, which is in the namespace Ninja
-	//(Similarly, IjdbRoutes is in the Ijdb namespace)
+	//(Similarly, JrplRoutes is in the Jrpl namespace)
 	//run uses layout.html.php to display stuff to the webpage (using $title and $output)
-	$entryPoint = new \Ninja\EntryPoint($route, $_SERVER['REQUEST_METHOD'], new \Ijdb\IjdbRoutes());
+	$entryPoint = new \Ninja\EntryPoint($route, $_SERVER['REQUEST_METHOD'], new \Jrpl\JrplRoutes());
 	$entryPoint->run();
 	
 //If $pdo (Database connection) doesn't work, this provides an error message

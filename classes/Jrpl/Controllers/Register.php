@@ -3,10 +3,10 @@
 //This class displays a form for authors to input their details and display a 'registration successful' page
 
 //namespace is like a folder and gives classes unique names, in case another developed creates an EntryPoint class
-namespace Ijdb\Controllers;
+namespace Jrpl\Controllers;
 
-//Although we are in Ijdb\Controllers namespace, 
-//'use' tells this file to look in namespace \Ninja\DatabaseTable for classes it can't find in Ijdb\Controllers
+//Although we are in Jrpl\Controllers namespace, 
+//'use' tells this file to look in namespace \Ninja\DatabaseTable for classes it can't find in Jrpl\Controllers
 use \Ninja\DatabaseTable;
 
 //Create Register class with $authorsTable as an input
@@ -121,7 +121,7 @@ class Register {
 	//getConstants is an in-built php function for reflection classes
 	public function permissions() {
 		$author = $this->authorsTable->findById($_GET['id']);
-		$reflected = new \ReflectionClass('\Ijdb\Entity\Author');
+		$reflected = new \ReflectionClass('\Jrpl\Entity\Author');
 		$constants = $reflected->getConstants();
 		return [
 			'template' => 'permissions.html.php',

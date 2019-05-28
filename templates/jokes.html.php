@@ -33,13 +33,13 @@
 			<?php //Otherwise, just the joke is listed?>	
 			<?php if ($user): ?>
 			
-				<?php if ($user->id  == $joke->authorId || $user->hasPermission(\Ijdb\Entity\Author::EDIT_JOKES)): ?>
+				<?php if ($user->id  == $joke->authorId || $user->hasPermission(\Jrpl\Entity\Author::EDIT_JOKES)): ?>
 					<a href ="/joke/edit?id=<?=$joke->id?>">
 					Edit
 					</a>
 				<?php endif; ?>
 				
-				<?php if ($user->id  == $joke->authorId || $user->hasPermission(\Ijdb\Entity\Author::DELETE_JOKES)): ?>
+				<?php if ($user->id  == $joke->authorId || $user->hasPermission(\Jrpl\Entity\Author::DELETE_JOKES)): ?>
 					 <form action="/joke/delete" method="post">
 						<input type="hidden" name="id" value="<?=$joke->id?>">
 						<input type="submit" value="Delete">

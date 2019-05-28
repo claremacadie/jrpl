@@ -4,7 +4,7 @@
 //This enables methods to be called on the $author instance, e.g. $author->addJoke($joke);
 //For this to work, $author needs to be an object, rather than an array, which is what this file does
 
-namespace Ijdb\Entity;
+namespace Jrpl\Entity;
 
 class Author {
 	public $id;

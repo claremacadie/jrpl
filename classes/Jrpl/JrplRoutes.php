@@ -4,12 +4,12 @@
 //DatabaseTable.php contains functions to manipulate databases, including insert record, edit record and find record
 //Authentication contains functions for users logging into the website
 
-//namespace is like a folder and gives classes unique names, in case another developer creates an IjdbRoutes class
-namespace Ijdb;
+//namespace is like a folder and gives classes unique names, in case another developer creates an JrplRoutes class
+namespace Jrpl;
 
 //Implements the type hinting defined in Routes.php
 //This ensures the correct formats are used as inputs
-class IjdbRoutes implements \Ninja\Routes {	
+class JrplRoutes implements \Ninja\Routes {	
 	private $authorsTable;
 	private $jokesTable;
 	private $categoriesTable;
@@ -20,9 +20,9 @@ class IjdbRoutes implements \Ninja\Routes {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
 		//Create instances of DatabaseTables for the joke, author and joke category tables
-		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'id', '\Ijdb\Entity\Joke', [&$this->authorsTable, &$this->jokeCategoriesTable]);
-		$this->authorsTable = new \Ninja\DatabaseTable($pdo, 'author', 'id', '\Ijdb\Entity\Author', [&$this->jokesTable]);
-		$this->categoriesTable = new \Ninja\DatabaseTable($pdo, 'category', 'id', '\Ijdb\Entity\Category', [&$this->jokesTable, &$this->jokeCategoriesTable]);
+		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'id', '\Jrpl\Entity\Joke', [&$this->authorsTable, &$this->jokeCategoriesTable]);
+		$this->authorsTable = new \Ninja\DatabaseTable($pdo, 'author', 'id', '\Jrpl\Entity\Author', [&$this->jokesTable]);
+		$this->categoriesTable = new \Ninja\DatabaseTable($pdo, 'category', 'id', '\Jrpl\Entity\Category', [&$this->jokesTable, &$this->jokeCategoriesTable]);
 		
 		//Create instance of DatabaseTables for the joke_category table, 
 		//which stores the many-many relationships between jokes and categories
@@ -36,10 +36,10 @@ class IjdbRoutes implements \Ninja\Routes {
 	//It uses type hinting to ensure it is array
 	public function getRoutes(): array {
 		//Create instance of controllers
-		$jokeController = new \Ijdb\Controllers\Joke($this->jokesTable, $this->authorsTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);
-		$authorController = new \Ijdb\Controllers\Register($this->authorsTable);
-		$loginController = new \Ijdb\Controllers\Login($this->authentication);
-		$categoryController = new \Ijdb\Controllers\Category($this->categoriesTable);
+		$jokeController = new \Jrpl\Controllers\Joke($this->jokesTable, $this->authorsTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);
+		$authorController = new \Jrpl\Controllers\Register($this->authorsTable);
+		$loginController = new \Jrpl\Controllers\Login($this->authentication);
+		$categoryController = new \Jrpl\Controllers\Category($this->categoriesTable);
 		
 		//These routes appear in the address bar of the browser
 		//They are used to determine which controller and which method ('action') within that controller is called
@@ -116,21 +116,21 @@ class IjdbRoutes implements \Ninja\Routes {
 					'controller' => $categoryController, 
 					'action' => 'edit'],
 				'login' => true,
-				'permissions' => \Ijdb\Entity\Author::EDIT_CATEGORIES],
+				'permissions' => \Jrpl\Entity\Author::EDIT_CATEGORIES],
 			
 			'category/delete' => [
 				'POST' => [
 					'controller' => $categoryController, 
 					'action' => 'delete'],
 				'login' => true,
-				'permissions' => \Ijdb\Entity\Author::REMOVE_CATEGORIES],
+				'permissions' => \Jrpl\Entity\Author::REMOVE_CATEGORIES],
 				
 			'category/list' => [
 				'GET' => [
 					'controller' => $categoryController, 
 					'action' => 'list'],
 				'login' => true,
-				'permissions' => \Ijdb\Entity\Author::LIST_CATEGORIES],
+				'permissions' => \Jrpl\Entity\Author::LIST_CATEGORIES],
 					
 			'author/permissions' => [
 				'GET' => [
@@ -140,14 +140,14 @@ class IjdbRoutes implements \Ninja\Routes {
 					'controller' => $authorController, 
 					'action' => 'savePermissions'],
 				'login' => true,
-				'permissions' => \Ijdb\Entity\Author::EDIT_USER_ACCESS],
+				'permissions' => \Jrpl\Entity\Author::EDIT_USER_ACCESS],
 				
 			'author/list' => [
 				'GET' => [
 					'controller' => $authorController,
 					'action' => 'list'],
 				'login' => true,
-				'permissions' => \Ijdb\Entity\Author::EDIT_USER_ACCESS],
+				'permissions' => \Jrpl\Entity\Author::EDIT_USER_ACCESS],
 				
 			'permissions/error' => [
 				'GET' => [

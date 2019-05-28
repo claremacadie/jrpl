@@ -1,7 +1,7 @@
 <?php
 //This creates a Joke entity class and its methods are available to joke objects
 
-namespace Ijdb\Entity;
+namespace Jrpl\Entity;
 
 class Joke {
 	public $id;

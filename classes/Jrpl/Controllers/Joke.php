@@ -2,10 +2,10 @@
 //All of the methods (functions) in this class are available to instances of this controller created by other files
 
 //namespace is like a folder and gives classes unique names, in case another developed creates an EntryPoint class
-namespace Ijdb\Controllers;
+namespace Jrpl\Controllers;
 
-//Although we are in Ijdb\Controllers namespace, 
-//'use' tells this file to look in namespaces \Ninja\DatabaseTable and Authentication for classes it can't find in Ijdb\Controllers
+//Although we are in Jrpl\Controllers namespace, 
+//'use' tells this file to look in namespaces \Ninja\DatabaseTable and Authentication for classes it can't find in Jrpl\Controllers
 use \Ninja\DatabaseTable;
 use \Ninja\Authentication;
 
@@ -86,7 +86,7 @@ class Joke {
 		
 		//If the authorId of the joke does not match the author['id'] of the user
 		//return leaves this method so that the code below is not executed and the joke is not deleted
-		if ($joke->authorId != $author->id && !$author->hasPermission(\Ijdb\Entity\Author::DELETE_JOKES)) {
+		if ($joke->authorId != $author->id && !$author->hasPermission(\Jrpl\Entity\Author::DELETE_JOKES)) {
 			return;
 		}
 		
@@ -113,7 +113,7 @@ class Joke {
  		$joke = $_POST['joke'];
 		
 		//Convert DateTime objects to a string that MySQL understands
-		//DateTime has a '\' in front because we are in Ijdb/Controllers namespace
+		//DateTime has a '\' in front because we are in Jrpl/Controllers namespace
 		//and DateTime is an in-built PHP class, in the global namespace
 		//'\' tells it to start from global namespace
 		$joke['jokeDate'] = new \DateTime();

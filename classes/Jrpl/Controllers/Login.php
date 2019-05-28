@@ -2,7 +2,7 @@
 
 //This file contains methods used for authenticating users or generating an error
 //when users try to use restricted functionality
-namespace Ijdb\Controllers;
+namespace Jrpl\Controllers;
 
 class Login
 {
