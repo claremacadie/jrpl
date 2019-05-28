@@ -1,4 +1,4 @@
-<?php // This file creates the html code for the register success page on the website?>
+<?php //This file creates the html code for the register success page on the website?>
 
 <h2>Registration Successful</h2>
 

@@ -1,37 +1,38 @@
 <?php
-// All of the methods (functions) in this class are available to instances of this controller created by other files
+//All of the methods (functions) in this class are available to instances of this controller created by other files
 
-// namespace is like a folder and gives classes unique names, in case another developed creates an EntryPoint class
-namespace Jrpl\Controllers;
+//namespace is like a folder and gives classes unique names, in case another developed creates an EntryPoint class
+namespace Ijdb\Controllers;
 
-// Although we are in Jrpl\Controllers namespace, 
-// 'use' tells this file to look in namespaces \Ninja\DatabaseTable and Authentication for classes it can't find in Jrpl\Controllers
+//Although we are in Ijdb\Controllers namespace, 
+//'use' tells this file to look in namespaces \Ninja\DatabaseTable and Authentication for classes it can't find in Ijdb\Controllers
 use \Ninja\DatabaseTable;
 use \Ninja\Authentication;
 
 
-class Team {
-	private $teamsTable;
-	private $matchesTable;
-	private $predictionsTable;
+class Joke {
+	private $jokesTable;
+	private $authorsTable;
+	private $categoriesTable;
+	private $jokeCategoriesTable;
 	private $authentication;
 	
-	// This constructs TeamController, with the teamsTable and matchesTable 
-	// When a TeamController class is created, __construct tells it that 
-	// $teamsTable is an input and it must be a DatabaseTable, and
-	// $matchesTable is an input and it must be a DatabaseTable, and
-	// $predictionsTable is an input and it much be a DatabaseTable, and
-	// $authentication is an input and it must be an Authentication object
+	//This constructs JokeController, with the jokesTable and authorsTable 
+	//When a JokeController class is created, __construct tells it that 
+	//$jokesTable is an input and it must be a DatabaseTable, and
+	//$authorsTable is an input and it must be a DatabaseTable, and
+	//$authentication is an input and it must be an Authentication object
 	
-	public function __construct(DatabaseTable $teamsTable, DatabaseTable $matchesTable, DatabaseTable $predictionsTable, Authentication $authentication) {
-		$this->teamsTable = $teamsTable;
-		$this->matchesTable = $matchesTable;
-		$this->predictionsTable = $predictionsTable;
+	public function __construct(DatabaseTable $jokesTable, DatabaseTable $authorsTable, DatabaseTable $categoriesTable, DatabaseTable $jokeCategoriesTable, Authentication $authentication) {
+		$this->jokesTable = $jokesTable;
+		$this->authorsTable = $authorsTable;
+		$this->categoriesTable = $categoriesTable;
+		$this->jokeCategoriesTable = $jokeCategoriesTable;
 		$this->authentication = $authentication;
 	}	
 
-	// This method returns a list of jokes matching the category selected and paginate so there are 10 jokes per page
-	// if no category is selected, return all the jokes in the database, ordered by date descending
+	//This method returns a list of jokes matching the category selected and paginate so there are 10 jokes per page
+	//if no category is selected, return all the jokes in the database, ordered by date descending
 	public function list() {
 		$page = $_GET['page'] ?? 1;
 		$offset = ($page-1)*10;

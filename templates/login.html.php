@@ -1,6 +1,6 @@
-<?php // This file creates the webpage for logging in?>
+<?php //This file creates the webpage for logging in?>
 
-<?php // This displays an error message in case logging in is not successful
+<?php //This displays an error message in case logging in is not successful
 if (isset($error)) {
 	echo '<div class="errors">' . $error . '</div>';
 }
@@ -17,5 +17,5 @@ if (isset($error)) {
 </form>
 
 <p>Don't have an account? 
-	<a href="\user\register">Click here to register an account</a>
+	<a href="\author\register">Click here to register an account</a>
 </p>
