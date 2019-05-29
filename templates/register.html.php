@@ -1,6 +1,6 @@
-<?php //This file creates the html code for the register page on the website?>
+<?php // This file creates the html code for the register page on the website?>
 
-<?php //This outputs the errors if the register form is filled in incorrectly?>
+<?php // This outputs the errors if the register form is filled in incorrectly?>
 <?php if (!empty($errors)) : ?>
 	
 	<div class="errors">
@@ -14,10 +14,10 @@
 <?php endif; ?>
 			
 
-<?php //This creates the form to register users?>
-<?php //'value = ....' this fills the input boxes with the value $user[name/email/password] if set, otherwise leave blank?>
-<?php //i.e. when there is an error filling in these boxes, the page reloads with the information filled in that was already entered by the user?>
-<?php //"userName", [userName] and 'userName' are title of the column in the database?>
+<?php // This creates the form to register users?>
+<?php // 'value = ....' this fills the input boxes with the value $user[name/email/password] if set, otherwise leave blank?>
+<?php // i.e. when there is an error filling in these boxes, the page reloads with the information filled in that was already entered by the user?>
+<?php // "userName", [userName] and 'userName' are title of the column in the database?>
 <form action="" method="post">
 
 	<label for="email">Your email address</label>

@@ -1,6 +1,6 @@
 <?php
 
-//This file converts formatting used by users when inputting jokes to formatting that is used by the website
+// This file converts formatting used by users when inputting jokes to formatting that is used by the website
 
 namespace Ninja;
 
@@ -11,32 +11,32 @@ class Markdown {
 		$this->string = $markDown;
 	}
 	
-	//This method converts formatting to html formatting
+	// This method converts formatting to html formatting
 	public function toHtml() {
-		//convert $this->string to HTML
+		// convert $this->string to HTML
 		$text = htmlspecialchars($this->string, ENT_QUOTES, 'UTF-8');
 		
-		//strong (bold)
+		// strong (bold)
 		$text = preg_replace('/__(.+?)__/s','<strong>$1</strong>', $text);
 		$text = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $text);
 		
-		//emphasis (italic)
+		// emphasis (italic)
 		$text = preg_replace('/_([^_]+)_/', '<em>$1</em>', $text);
 		$text = preg_replace('/\*([^\*]+)\*/', '<em>$1</em>', $text);
 		
-		//Convert Windows (\r\n) to Unix (\n)
+		// Convert Windows (\r\n) to Unix (\n)
 		$text = str_replace("\r\n", "\n", $text);
 		
-		//Convert Macintosh (\r) to Unix (\n)
+		// Convert Macintosh (\r) to Unix (\n)
 		$text = str_replace("\r", "\n", $text);
 		
-		//Paragraphs
+		// Paragraphs
 		$text = '<p>' . str_replace("\n\n", '</p><p>', $text) . '</p>';
 		
-		//Line breaks
+		// Line breaks
 		$text = str_replace("\n", '<br>', $text);
 		
-		//[linked text](link URL)
+		// [linked text](link URL)
 		$text = preg_replace('/\[([^\]]+)]\(([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\)/i', '<a href="$2">$1</a>', $text);
 		
 		return $text;
