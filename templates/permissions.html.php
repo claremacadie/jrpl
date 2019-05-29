@@ -1,6 +1,7 @@
-<?php //This file produces the html code for a page to edit a user's permissions ?>
+<?php // This file produces the html code for a page to edit a user's permissions ?>
+<?php // userName is the title of the column in the database?>
 
-<h2>Edit <?=$user->name?>'s Permissions</h2>
+<h2>Edit <?=$user->userName?>'s Permissions</h2>
 
 <form action ="" method="post">
 	<?php foreach ($permissions as $name => $value):?>

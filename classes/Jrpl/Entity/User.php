@@ -1,8 +1,9 @@
 <?php
 
-//This file creates an entity class 'user'
-//This enables methods to be called on the $user instance, e.g. $user->addJoke($joke);
-//For this to work, $user needs to be an object, rather than an array, which is what this file does
+// This file creates an entity class 'user'
+// This enables methods to be called on the $user instance, e.g. $user->addJoke($joke);
+// For this to work, $user needs to be an object, rather than an array, which is what this file does
+// $userName is the title of the column in the database
 
 namespace Jrpl\Entity;
 
