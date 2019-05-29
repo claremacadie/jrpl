@@ -20,7 +20,7 @@ class JrplRoutes implements \Ninja\Routes {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
 		//Create instances of DatabaseTables for the joke, user and joke category tables
-		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'id', '\Jrpl\Entity\Joke', [&$this->usersTable, &$this->jokeCategoriesTable]);
+		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'jokeId', '\Jrpl\Entity\Joke', [&$this->usersTable, &$this->jokeCategoriesTable]);
 		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'id', '\Jrpl\Entity\user', [&$this->jokesTable]);
 		$this->categoriesTable = new \Ninja\DatabaseTable($pdo, 'category', 'id', '\Jrpl\Entity\Category', [&$this->jokesTable, &$this->jokeCategoriesTable]);
 		

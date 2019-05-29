@@ -82,7 +82,7 @@ class Joke {
 		$user = $this->authentication->getUser();
 		
 		//Set $joke to the joke in the database matching the id, using findById
-		$joke = $this->jokesTable->findById($_POST['id']);
+		$joke = $this->jokesTable->findById($_POST['jokeId']);
 		
 		//If the userId of the joke does not match the user['id'] of the user
 		//return leaves this method so that the code below is not executed and the joke is not deleted
@@ -91,8 +91,8 @@ class Joke {
 		}
 		
 		//Otherwise, delete the joke from the database (both the joke table and the joke_category table)
-		$this->jokesTable->delete($_POST['id']);
-		$this->jokeCategoriesTable->deleteWhere('jokeId', $_POST['id']);
+		$this->jokesTable->delete($_POST['jokeId']);
+		$this->jokeCategoriesTable->deleteWhere('jokeId', $_POST['jokeId']);
 		
 		//Send the browser to /joke/list
 		header('location: /joke/list');
@@ -155,8 +155,8 @@ class Joke {
 		//These are passed to the template
 		$categories = $this->categoriesTable->findAll();
 		
-		if (isset($_GET['id'])) {
-			$joke = $this->jokesTable->findById($_GET['id']);
+		if (isset($_GET['jokeId'])) {
+			$joke = $this->jokesTable->findById($_GET['jokeId']);
 		}
 		
 		//Set variable 'title'

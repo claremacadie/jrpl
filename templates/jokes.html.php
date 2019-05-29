@@ -34,14 +34,14 @@
 			<?php if ($user): ?>
 			
 				<?php if ($user->id  == $joke->userId || $user->hasPermission(\Jrpl\Entity\user::EDIT_JOKES)): ?>
-					<a href ="/joke/edit?id=<?=$joke->id?>">
+					<a href ="/joke/edit?jokeId=<?=$joke->jokeId?>">
 					Edit
 					</a>
 				<?php endif; ?>
 				
 				<?php if ($user->id  == $joke->userId || $user->hasPermission(\Jrpl\Entity\user::DELETE_JOKES)): ?>
 					 <form action="/joke/delete" method="post">
-						<input type="hidden" name="id" value="<?=$joke->id?>">
+						<input type="hidden" name="jokeId" value="<?=$joke->jokeId?>">
 						<input type="submit" value="Delete">
 					</form>
 				<?php endif; ?>

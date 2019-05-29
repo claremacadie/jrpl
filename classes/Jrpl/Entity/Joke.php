@@ -4,7 +4,7 @@
 namespace Jrpl\Entity;
 
 class Joke {
-	public $id;
+	public $jokeId;
 	public $userId;
 	public $jokeDate;
 	public $jokeText;
@@ -28,7 +28,7 @@ class Joke {
 	//This method is used to ensure whenever a joke is added to the website, it is assigned to the categories that were checked
 	public function addCategory($categoryId) {
 		$jokeCat = [
-			'jokeId' => $this->id,
+			'jokeId' => $this->jokeId,
 			'categoryId' => $categoryId
 		];
 		
@@ -38,7 +38,7 @@ class Joke {
 	//This method determines whether a joke has a category assigned
 	//It loops through the categories and checks to see if each one matches a given $categoryId
 	public function hasCategory($categoryId) {
-		$jokeCategories = $this->jokeCategoriesTable->find('jokeId', $this->id);
+		$jokeCategories = $this->jokeCategoriesTable->find('jokeId', $this->jokeId);
 		foreach ($jokeCategories as $jokeCategory) {
 			if ($jokeCategory->categoryId == $categoryId) {
 				return true;
@@ -50,6 +50,6 @@ class Joke {
 	//This is used to clear all categories before adding categories back in when editing jokes
 	//(it's easier than looping through each category to see if it is checked and unchecking if needed)
 	public function clearCategories() {
-		$this->jokeCategoriesTable->deleteWhere('jokeId', $this->id);
+		$this->jokeCategoriesTable->deleteWhere('jokeId', $this->jokeId);
 	}	
 }
