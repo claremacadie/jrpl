@@ -230,7 +230,7 @@ class DatabaseTable {
 		$this->query($sql, $fields);	
 	}
 
-	// This emthod deletes a record from any database table using its primary key
+	// This method deletes a record from any database table using its primary key
 	// The query it creates looks like:
 	// DELETE FROM `joke` WHERE `primaryKey` = :1;
 	public function delete($id) {

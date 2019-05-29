@@ -14,8 +14,8 @@ class Category {
 	//If an id is set, this method finds the category in the database and returns it to the form to be edited
 	//If no id is set, then the form is blank
 	public function edit() {
-		if (isset($_GET['id'])) {
-			$category = $this->categoriesTable->findById($_GET['id']);
+		if (isset($_GET['categoryId'])) {
+			$category = $this->categoriesTable->findById($_GET['categoryId']);
 		}
 		
 		$title = 'Edit Category';
@@ -53,7 +53,7 @@ class Category {
 			
 	//This method enables categories to be deleted
 	public function delete() {
-		$this->categoriesTable->delete($_POST['id']);
+		$this->categoriesTable->delete($_POST['categoryId']);
 		
 		//redirects the browser to the category/list page
 		header('location: /category/list');
@@ -66,7 +66,7 @@ class Category {
 	//using $limit and offset to select the relevant jokes for the page,
 	//and uses usort and sortJokesByDate to sort them in date order
 	public function getjokes($limit = null, $offset = null) {
-		$jokeCategories = $this->jokeCategoriesTable->find('categoryId', $this->id, null, $limit, $offset);
+		$jokeCategories = $this->jokeCategoriesTable->find('categoryId', $this->categoryId, null, $limit, $offset);
 		$jokes = [];
 		
 		foreach ($jokeCategories as $jokeCategory) {

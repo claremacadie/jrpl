@@ -28,21 +28,21 @@
 			<?php //category[] creates an array when the form is submitted to store the category names?>
 			<?php //use the hasCategory method in the joke entity to check the boxes for relevant categories?>
 			<?php //&& means if $joke is set and hasCategory is true?>
-			<?php if ($joke && $joke->hasCategory($category->id)): ?>
+			<?php if ($joke && $joke->hasCategory($category->categoryId)): ?>
 		
 				<?php //create a checkbox for each category with the value property set to the id of the category?>
 				<?php //category[] creates an array when the form is submitted to store the category names?>
 				<input	
 					type="checkbox"
 					checked name="category[]"
-					value="<?=$category->id?>"
+					value="<?=$category->categoryId?>"
 				/>
 				
 			<?php else: ?>
 				<input	
 					type="checkbox"
 					name="category[]"
-					value="<?=$category->id?>"
+					value="<?=$category->categoryId?>"
 				/>
 							
 			<?php endif;?>

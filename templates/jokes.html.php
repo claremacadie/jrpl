@@ -5,7 +5,7 @@
 	<ul class="categories">
 		<li><a href="/joke/list">All jokes</a></li>
 		<?php foreach ($categories as $category): ?>
-			<li><a href="/joke/list?category=<?=$category->id?>"><?=$category->name?></a></li>
+			<li><a href="/joke/list?category=<?=$category->categoryId?>"><?=$category->name?></a></li>
 		<?php endforeach; ?>
 	</ul>
 
@@ -61,25 +61,12 @@
 	for ($i = 1; $i <= $numPages; $i++):
 		if ($i == $currentPage):
 	?>
-			<a class="currentpage" href="/joke/list?page=<?=$i?><?=!empty($currentCategory) ? '&category=' . $currentCategory->id : '' ?>"><?=$i?></a>
+			<a class="currentpage" href="/joke/list?page=<?=$i?><?=!empty($currentCategory) ? '&category=' . $currentCategory->categoryId : '' ?>"><?=$i?></a>
 			
 		<?php else: ?>
-			<a href="/joke/list?page=<?=$i?><?=!empty($currentCategory) ? '&category=' . $currentCategory->id : '' ?>"><?=$i?></a>
+			<a href="/joke/list?page=<?=$i?><?=!empty($currentCategory) ? '&category=' . $currentCategory->categoryId : '' ?>"><?=$i?></a>
 			
 		<?php endif; ?>
 	<?php endfor; ?>	
 		
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-

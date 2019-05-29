@@ -22,7 +22,7 @@ class JrplRoutes implements \Ninja\Routes {
 		//Create instances of DatabaseTables for the joke, user and joke category tables
 		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'jokeId', '\Jrpl\Entity\Joke', [&$this->usersTable, &$this->jokeCategoriesTable]);
 		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'id', '\Jrpl\Entity\user', [&$this->jokesTable]);
-		$this->categoriesTable = new \Ninja\DatabaseTable($pdo, 'category', 'id', '\Jrpl\Entity\Category', [&$this->jokesTable, &$this->jokeCategoriesTable]);
+		$this->categoriesTable = new \Ninja\DatabaseTable($pdo, 'category', 'categoryId', '\Jrpl\Entity\Category', [&$this->jokesTable, &$this->jokeCategoriesTable]);
 		
 		//Create instance of DatabaseTables for the joke_category table, 
 		//which stores the many-many relationships between jokes and categories

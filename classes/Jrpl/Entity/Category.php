@@ -6,7 +6,7 @@ namespace Jrpl\Entity;
 use Ninja\DatabaseTable;
 
 class Category {
-	public $id;
+	public $categoryId;
 	public $name;
 	private $jokesTable;
 	private $jokeCategoriesTable;
@@ -19,7 +19,7 @@ class Category {
 	
 	//This method returns the first 10 jokes matching a particular category id
 	public function getJokes($limit = null, $offset = null) {
-		$jokeCategories = $this->jokeCategoriesTable->find('categoryId', $this->id, null, $limit, $offset);
+		$jokeCategories = $this->jokeCategoriesTable->find('categoryId', $this->categoryId, null, $limit, $offset);
 		$jokes = [];
 		foreach ($jokeCategories as $jokeCategory) {
 			$joke = $this->jokesTable->findById($jokeCategory->jokeId);
@@ -32,6 +32,6 @@ class Category {
 
 	//This method returns the total number of jokes for a given category
 	public function getNumJokes() {
-		return $this->jokeCategoriesTable->total('categoryId', $this->id);
+		return $this->jokeCategoriesTable->total('categoryId', $this->categoryId);
 	}
 }

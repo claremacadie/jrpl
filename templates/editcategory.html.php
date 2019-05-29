@@ -1,10 +1,11 @@
-<?php //This creates the form for adding and editing categories of jokes?>
+<?php // This creates the form for adding and editing categories of jokes?>
+<?php // Don't change id= in the input<>, this does not relate to database column titles!?>
 
 <form action="" method="post">
 	<input 
 		type="hidden"
-		name="category[id]"
-		value="<?=$category->id ?? ''?>"
+		name="category[categoryId]"
+		value="<?=$category->categoryId ?? ''?>"
 	/>
 	
 	<label for="categoryname">Enter category name:</label>

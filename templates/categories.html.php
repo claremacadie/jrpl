@@ -10,14 +10,14 @@
 		<p>
 			<?=htmlspecialchars($category->name, ENT_QUOTES, 'UTF-8')?>
 			
-			<a href="/category/edit?id=<?=$category->id?>">Edit</a>
+			<a href="/category/edit?categoryId=<?=$category->categoryId?>">Edit</a>
 			
 			<form action="/category/delete" method="post"/>
 			
 				<input
 					type="hidden"
-					name="id"
-					value="<?=$category->id?>"
+					name="categoryId"
+					value="<?=$category->categoryId?>"
 				/>
 				
 				<input
