@@ -8,7 +8,7 @@
 namespace Jrpl\Entity;
 
 class user {
-	public $id;
+	public $userId;
 	public $userName;
 	public $email;
 	public $password;
@@ -27,16 +27,16 @@ class user {
 		$this->jokesTable = $jokesTable;
 	}
 	
-	//This method retrieves jokes from the database where the userId matches the id of this user class
+	//This method retrieves jokes from the database where the userId matches the userId of this user class
 	public function getJokes() {
-		return $this->jokesTable->find('userId', $this->id);
+		return $this->jokesTable->find('userId', $this->userId);
 	}
 	
 	//This method adds jokes to the database using the save method (defined in DatabaseTable)
-	//It sets the userId of the joke to be added as the id of this user class
+	//It sets the userId of the joke to be added as the userId of this user class
 	//and return enables the value of the save method to be output when this method is used
 	public function addJoke($joke) {
-		$joke['userId'] = $this->id;
+		$joke['userId'] = $this->userId;
 		return $this->jokesTable->save($joke);
 	}
 	

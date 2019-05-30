@@ -3,7 +3,7 @@
 <?php //or if the user has permission to edit jokes?>
 <?php //Otherwise, display a message saying they can't edit the joke?>
 
-<?php if (empty($joke->jokeId) || $user->id == $joke->userId || $user->hasPermission(\Jrpl\Entity\user::EDIT_JOKES)):?>
+<?php if (empty($joke->jokeId) || $user->userId == $joke->userId || $user->hasPermission(\Jrpl\Entity\user::EDIT_JOKES)):?>
 
 	<form 
 		action="" 

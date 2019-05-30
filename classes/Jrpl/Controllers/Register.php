@@ -121,7 +121,7 @@ class Register {
 	//ReflectionClass enables all the variables, methods and constants of a class to be read
 	//getConstants is an in-built php function for reflection classes
 	public function permissions() {
-		$user = $this->usersTable->findById($_GET['id']);
+		$user = $this->usersTable->findById($_GET['userId']);
 		$reflected = new \ReflectionClass('\Jrpl\Entity\user');
 		$constants = $reflected->getConstants();
 		return [
@@ -139,7 +139,7 @@ class Register {
 	//if no boxes are ticked it is set to an empty array
 	public function savePermissions() {
 		$user = [
-			'id' => $_GET['id'],
+			'userId' => $_GET['userId'],
 			'permissions' => array_sum($_POST['permissions'] ?? [])
 		];
 		

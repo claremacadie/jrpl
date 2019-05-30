@@ -16,7 +16,7 @@
 			<td><?=$user->userName;?></td>
 			<td><?=$user->email;?></td>
 			<td>
-				<a href="/user/permissions?id=<?=$user->id;?>">Edit Permissions</a>
+				<a href="/user/permissions?userId=<?=$user->userId;?>">Edit Permissions</a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

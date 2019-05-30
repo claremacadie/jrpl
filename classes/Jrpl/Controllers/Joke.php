@@ -84,9 +84,9 @@ class Joke {
 		//Set $joke to the joke in the database matching the id, using findById
 		$joke = $this->jokesTable->findById($_POST['jokeId']);
 		
-		//If the userId of the joke does not match the user['id'] of the user
+		//If the userId of the joke does not match the user['userId'] of the user
 		//return leaves this method so that the code below is not executed and the joke is not deleted
-		if ($joke->userId != $user->id && !$user->hasPermission(\Jrpl\Entity\user::DELETE_JOKES)) {
+		if ($joke->userId != $user->userId && !$user->hasPermission(\Jrpl\Entity\user::DELETE_JOKES)) {
 			return;
 		}
 		
