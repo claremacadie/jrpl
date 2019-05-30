@@ -7,7 +7,7 @@ use Ninja\DatabaseTable;
 
 class Category {
 	public $categoryId;
-	public $name;
+	public $categoryName;
 	private $jokesTable;
 	private $jokeCategoriesTable;
 	

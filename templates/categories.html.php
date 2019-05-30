@@ -8,7 +8,7 @@
 
 	<blockquote>
 		<p>
-			<?=htmlspecialchars($category->name, ENT_QUOTES, 'UTF-8')?>
+			<?=htmlspecialchars($category->categoryName, ENT_QUOTES, 'UTF-8')?>
 			
 			<a href="/category/edit?categoryId=<?=$category->categoryId?>">Edit</a>
 			

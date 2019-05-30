@@ -5,7 +5,7 @@
 	<ul class="categories">
 		<li><a href="/joke/list">All jokes</a></li>
 		<?php foreach ($categories as $category): ?>
-			<li><a href="/joke/list?category=<?=$category->categoryId?>"><?=$category->name?></a></li>
+			<li><a href="/joke/list?category=<?=$category->categoryId?>"><?=$category->categoryName?></a></li>
 		<?php endforeach; ?>
 	</ul>
 
@@ -15,7 +15,7 @@
 	<?php if (empty($currentCategory)): ?>
 		<p><?=$totalJokes?> jokes in total have been submitted to the Internet Joke Database.</p>
 	<?php else: ?>
-		<p><?=$totalJokes?> jokes in the <?=$currentCategory->name?> category have been submitted to the Internet Joke Database.</p>
+		<p><?=$totalJokes?> jokes in the <?=$currentCategory->categoryName?> category have been submitted to the Internet Joke Database.</p>
 	<?php endif; ?>
 	
 	<?php //Output a list of jokes with an email link for the user, date (formatted to 1st april 2019), edit link and delete button?>

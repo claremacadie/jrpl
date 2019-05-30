@@ -47,7 +47,7 @@
 							
 			<?php endif;?>
 			
-			<label><?=$category->name?></label>
+			<label><?=$category->categoryName?></label>
 			
 		<?php endforeach; ?>
 		

@@ -1,5 +1,5 @@
 <?php // This creates the form for adding and editing categories of jokes?>
-<?php // Don't change id= in the input<>, this does not relate to database column titles!?>
+<?php // Don't change id=, or name= in the input<>, these do not relate to database column titles!?>
 
 <form action="" method="post">
 	<input 
@@ -13,8 +13,8 @@
 	<input 
 		type="text"
 		id="categoryname"
-		name="category[name]"
-		value="<?=$category->name ?? ''?>"
+		name="category[categoryName]"
+		value="<?=$category->categoryName ?? ''?>"
 	/>
 	
 	<input
