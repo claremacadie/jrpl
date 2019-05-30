@@ -16,6 +16,8 @@
 				<li><a href="/">Home</a></li>
 				<li><a href="/joke/list">Jokes list</a></li>
 				<li><a href="/joke/edit">Add a new joke</a></li>
+				<li><a href="/team/list">Teams list</a></li>
+				<li><a href="/team/edit">Add a new team</a></li>
 					
 				<?php // This displays a logout option when a user is logged in and and login option when they are not logged in?>
 				<?php // Administer categories and users is only shown if logged in user has permission to edit these?>

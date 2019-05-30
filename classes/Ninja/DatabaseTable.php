@@ -2,7 +2,6 @@
 // This file creates a class 'DatabaseTable' that can be used to manipulate database tables
 // This file creates functions used by other files (using include or require)
 // Variable $query has been renamed $sql (compared to the book) to reduce confusion with the function 'query'
-// The primary key of tables needs to be title 'id' for this to work
 
 // namespace is like a folder and gives classes unique names, in case another developer creates an EntryPoint class
 namespace Ninja;
@@ -222,7 +221,7 @@ class DatabaseTable {
 		$sql .= ' WHERE `' . $this->primaryKey . '` = :primaryKey';
 		
 		// Set the :primaryKey variable
-		$fields['primaryKey'] = $fields['id'];
+		$fields['primaryKey'] = $fields[$this->primaryKey];
 		
 		// Change the date format to one MySQL can understand
 		$fields = $this->processDates($fields);
