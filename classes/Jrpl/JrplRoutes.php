@@ -13,6 +13,7 @@ class JrplRoutes implements \Ninja\Routes {
 	private $usersTable;
 	private $authentication;
 	private $teams;
+	private $groups;
 	
 	private $jokesTable;
 	private $categoriesTable;
@@ -21,9 +22,10 @@ class JrplRoutes implements \Ninja\Routes {
 	public function __construct() {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
-		// Create instance of DatabaseTables for the user and team tables
+		// Create instance of DatabaseTables for the user, team and group tables
 		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'userId', '\Jrpl\Entity\user', [&$this->jokesTable]);
 		$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'team', 'teamId');
+		$this->groupsTable = new \Ninja\DatabaseTable($pdo, 'group', 'groupId');
 		
 		// Create an instance of the Authentication class
 		$this->authentication = new \Ninja\Authentication($this->usersTable, 'email', 'password');		
@@ -44,6 +46,7 @@ class JrplRoutes implements \Ninja\Routes {
 		$userController = new \Jrpl\Controllers\Register($this->usersTable);
 		$loginController = new \Jrpl\Controllers\Login($this->authentication);
 		$teamController = new \Jrpl\Controllers\Team($this->teamsTable);
+		$groupController = new \Jrpl\Controllers\Group($this->groupsTable);
 
 		$jokeController = new \Jrpl\Controllers\Joke($this->jokesTable, $this->usersTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);
 		$categoryController = new \Jrpl\Controllers\Category($this->categoriesTable);
@@ -53,6 +56,26 @@ class JrplRoutes implements \Ninja\Routes {
 		// They also use 'login' => true to ensure only specific actions are available to logged in users,
 		// and 'permissions' to ensure only specific actions are available to users with appropriate permissions.		
 		$routes = [
+			'group/list' => [
+				'GET' => [
+					'controller' => $groupController, 
+					'action' => 'list']],
+			
+			'group/edit' => [
+				'POST' => [
+					'controller' => $groupController, 
+					'action' => 'saveEdit'],
+				'GET' => [
+					'controller' => $groupController, 
+					'action' => 'edit'],
+				'login' => true],
+			
+			'group/delete' => [
+				'POST' => [
+					'controller' => $groupController, 
+					'action' => 'delete'],
+				'login' => true],
+						
 			'team/list' => [
 				'GET' => [
 					'controller' => $teamController, 
