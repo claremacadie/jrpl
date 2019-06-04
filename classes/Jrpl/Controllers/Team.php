@@ -6,9 +6,11 @@ namespace Jrpl\Controllers;
 
 class Team {
 	private $teamsTable;
+	private $groupsTable;
 	
-	public function __construct(\Ninja\DatabaseTable $teamsTable) {
+	public function __construct(\Ninja\DatabaseTable $teamsTable, \Ninja\DatabaseTable $groupsTable) {
 		$this->teamsTable = $teamsTable;
+		$this->groupsTable = $groupsTable;
 	}
 	
 	// If an id is set, this method finds the team in the database and returns it to the form to be edited
@@ -18,20 +20,25 @@ class Team {
 			$team = $this->teamsTable->findById($_GET['teamId']);
 		}
 		
+		// $groups is used on the teamedit.html.php form to list the groups in a dropdown list
+		$groups = $this->groupsTable->findAll();
+		
 		$title = 'Edit Team';
 		
 		return [
-			'template' => 'editteam.html.php',
+			'template' => 'teamedit.html.php',
 			'title' =>$title,
 			'variables' => [
 				'team' => $team ?? null,
-				'teamGroup' => $teamGroup ?? null]
+				'teamGroup' => $teamGroup ?? null,
+				'groups' => $groups]
 		];
 	}
 	
 	// This method uses the DatabaseTable save method to update existing teams and insert new teams
 	public function saveEdit() {
 		$team = $_POST['team'];
+
 		$this->teamsTable->save($team);
 		
 		// Redirect browser to team/list webpage

@@ -24,7 +24,7 @@ class JrplRoutes implements \Ninja\Routes {
 
 		// Create instance of DatabaseTables for the user, team and group tables
 		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'userId', '\Jrpl\Entity\user', [&$this->jokesTable]);
-		$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'team', 'teamId');
+		$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'team', 'teamId', '\Jrpl\Entity\Team', [&$this->groupsTable]);
 		$this->groupsTable = new \Ninja\DatabaseTable($pdo, 'group', 'groupId');
 		
 		// Create an instance of the Authentication class
@@ -45,7 +45,7 @@ class JrplRoutes implements \Ninja\Routes {
 		// Create instance of controllers
 		$userController = new \Jrpl\Controllers\Register($this->usersTable);
 		$loginController = new \Jrpl\Controllers\Login($this->authentication);
-		$teamController = new \Jrpl\Controllers\Team($this->teamsTable);
+		$teamController = new \Jrpl\Controllers\Team($this->teamsTable, $this->groupsTable);
 		$groupController = new \Jrpl\Controllers\Group($this->groupsTable);
 
 		$jokeController = new \Jrpl\Controllers\Joke($this->jokesTable, $this->usersTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);

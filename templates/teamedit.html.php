@@ -19,12 +19,14 @@
 
 	<label for="groupname">Enter group:</label>
 	
-	<input 
-		type="text"
-		id="groupname"
-		name="team[teamGroup]"
-		value="<?=$team->teamGroup ?? ''?>"
-	/>
+	<select id="groupname"
+		name="team[groupId]">
+		<option value="">--Please choose a group--</option>
+		<?php // Create a dropdown list from the group variable ?>
+		<?php foreach ($groups as $group): ?>
+			<option value="<?=$group->groupId;?>"><?=$group->groupName;?></option>
+		<?php endforeach; ?>
+	</select>
 	
 	<input
 		type="submit"

@@ -14,7 +14,8 @@
 		<?php foreach ($teams as $team): ?>
 		<tr>
 			<td><?=$team->teamName;?></td>
-			<td><?=$team->teamGroup;?></td>
+			<?php // use the getGroup method in the team entity to return the name of the group ?>
+			<td><?=$team->getGroup()->groupName;?></td>
 			<td>
 				<a href ="/team/edit?teamId=<?=$team->teamId?>">Edit</a>
 			</td>
