@@ -39,6 +39,11 @@ class Team {
 	public function saveEdit() {
 		$team = $_POST['team'];
 
+		// This allows no group to be selected in the team edit page
+		if ($team['groupId'] == '') {
+			$team['groupId'] = null;
+		}
+
 		$this->teamsTable->save($team);
 		
 		// Redirect browser to team/list webpage
