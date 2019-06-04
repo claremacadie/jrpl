@@ -21,7 +21,7 @@ class Group {
 		$title = 'Edit Group';
 		
 		return [
-			'template' => 'editgroup.html.php',
+			'template' => 'groupedit.html.php',
 			'title' =>$title,
 			'variables' => [
 				'group' => $group ?? null]
@@ -45,7 +45,7 @@ class Group {
 		$groups = $this->groupsTable->findAll();
 		$title = 'Groups';
 		return [
-			'template' => 'listgroups.html.php',
+			'template' => 'grouplist.html.php',
 			'title' => $title,
 			'variables' => ['groups' => $groups]
 		];

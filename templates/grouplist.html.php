@@ -1,7 +1,7 @@
 <?php // Template for the group list?>
 <?php // $group->groupName, groupName is the title of the column in the database?>
 
-<h2>Team List</h2>
+<h2>Group List</h2>
 
 <table>
 	<thread>
