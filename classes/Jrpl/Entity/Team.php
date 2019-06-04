@@ -14,7 +14,7 @@ class Team {
 		$this->groupsTable = $groupsTable;
 	}
 	
-	// TThis method returns the user for the current team
+	// This method returns the group for the current team
 	public function getGroup() {
 		if (empty($this->group)) {
 			$this->group = $this->groupsTable->findById($this->groupId);

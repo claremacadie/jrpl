@@ -21,8 +21,15 @@
 	
 	<select id="groupname"
 		name="team[groupId]">
-		<option value="">--Please choose a group--</option>
-		<?php // Create a dropdown list from the group variable ?>
+		
+		<?php // If a group is already entered for the team, display this in the dropdown, otherwise display 'Please choose...' ?>
+		<?php if (isset($team->groupId)): ?>
+			<option value="<?=$team->groupId;?>"><?=$team->getGroup()->groupName;?></option>
+		<?php else: ?>		
+			<option value="">--Please choose a group--</option>
+		<?php endif;?>
+		
+		<?php // Create a dropdown list using the group variable ?>
 		<?php foreach ($groups as $group): ?>
 			<option value="<?=$group->groupId;?>"><?=$group->groupName;?></option>
 		<?php endforeach; ?>
