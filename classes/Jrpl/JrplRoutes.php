@@ -14,6 +14,7 @@ class JrplRoutes implements \Ninja\Routes {
 	private $authentication;
 	private $teams;
 	private $groups;
+	private $matches;
 	
 	private $jokesTable;
 	private $categoriesTable;
@@ -25,6 +26,7 @@ class JrplRoutes implements \Ninja\Routes {
 		// Create instance of DatabaseTables for the user, team and group tables
 		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'userId', '\Jrpl\Entity\user', [&$this->jokesTable]);
 		$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'team', 'teamId', '\Jrpl\Entity\Team', [&$this->groupsTable]);
+		$this->matchesTable = new \Ninja\DatabaseTable($pdo, 'match', 'matchId', '\Jrpl\Entity\Match', [&$this->teamsTable]);
 		$this->groupsTable = new \Ninja\DatabaseTable($pdo, 'group', 'groupId');
 		
 		// Create an instance of the Authentication class
@@ -47,6 +49,7 @@ class JrplRoutes implements \Ninja\Routes {
 		$loginController = new \Jrpl\Controllers\Login($this->authentication);
 		$teamController = new \Jrpl\Controllers\Team($this->teamsTable, $this->groupsTable);
 		$groupController = new \Jrpl\Controllers\Group($this->groupsTable);
+		$matchController = new \Jrpl\Controllers\Match($this->matchesTable, $this->teamsTable);
 
 		$jokeController = new \Jrpl\Controllers\Joke($this->jokesTable, $this->usersTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);
 		$categoryController = new \Jrpl\Controllers\Category($this->categoriesTable);
@@ -56,6 +59,26 @@ class JrplRoutes implements \Ninja\Routes {
 		// They also use 'login' => true to ensure only specific actions are available to logged in users,
 		// and 'permissions' to ensure only specific actions are available to users with appropriate permissions.		
 		$routes = [
+			'match/list' => [
+				'GET' => [
+					'controller' => $matchController, 
+					'action' => 'list']],
+			
+			'group/match' => [
+				'POST' => [
+					'controller' => $matchController, 
+					'action' => 'saveEdit'],
+				'GET' => [
+					'controller' => $matchController, 
+					'action' => 'edit'],
+				'login' => true],
+			
+			'match/delete' => [
+				'POST' => [
+					'controller' => $matchController, 
+					'action' => 'delete'],
+				'login' => true],
+				
 			'group/list' => [
 				'GET' => [
 					'controller' => $groupController, 

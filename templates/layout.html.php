@@ -20,6 +20,8 @@
 				<li><a href="/team/edit">Add a new team</a></li>
 				<li><a href="/group/list">Groups list</a></li>
 				<li><a href="/group/edit">Add a new group</a></li>
+				<li><a href="/match/list">Matches list</a></li>
+				<li><a href="/match/edit">Add a new match</a></li>
 					
 				<?php // This displays a logout option when a user is logged in and and login option when they are not logged in?>
 				<?php // Administer categories and users is only shown if logged in user has permission to edit these?>
