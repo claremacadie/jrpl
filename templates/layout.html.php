@@ -1,6 +1,6 @@
 <?php // doctype html?>
-<?php // This files sets the layout for the jokedatabase website using the jokes.css file?>
-<?php // Make sure jokes.css is in the same directory as index.php?>
+<?php // This files sets the layout for the jrpl website using the jrpl.css file?>
+<?php // Make sure jrpl.css is in the same directory as index.php?>
 <html>
 	<head>
 	  <meta charset="utf-8">
