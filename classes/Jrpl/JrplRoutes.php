@@ -64,7 +64,7 @@ class JrplRoutes implements \Ninja\Routes {
 					'controller' => $matchController, 
 					'action' => 'list']],
 			
-			'group/match' => [
+			'match/edit' => [
 				'POST' => [
 					'controller' => $matchController, 
 					'action' => 'saveEdit'],

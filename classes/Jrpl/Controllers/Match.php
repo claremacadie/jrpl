@@ -20,7 +20,7 @@ class Match {
 			$match = $this->matchesTable->findById($_GET['matchId']);
 		}
 		
-		// $teams is used on the matchedit.html.php form to list the teams in a dropdown list
+		// $teams is used on the matchedit.html.php form for a dropdown list
 		$teams = $this->teamsTable->findAll();
 		
 		$title = 'Edit Match';
