@@ -9,6 +9,7 @@
 		<th>DateTime</th>
 		<th>Team1 Score</th>
 		<th>Team2 Score</th>
+		<th>Stage</th>
 		<th>Edit</th>
 	</thread>
 	
@@ -22,6 +23,7 @@
 			<td><?=$match->matchDateTime;?></td>
 			<td><?=$match->team1Score;?></td>
 			<td><?=$match->team2Score;?></td>
+			<td><?=$match->matchStage;?></td>
 
 			<td>
 				<a href ="/match/edit?matchId=<?=$match->team1Id?>">Edit</a>

@@ -51,6 +51,14 @@
 		name="match[team2Score]"
 		value="<?=$match->team2Score ?? ''?>"
 	/>
+	
+	<label for="matchstage">Stage</label>
+	<input 
+		type="text"
+		id="matchstage"
+		name="match[matchStage]"
+		value="<?=$match->matchStage ?? ''?>"
+	/>
 
 	<input
 		type="submit"
