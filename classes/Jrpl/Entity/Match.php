@@ -10,14 +10,14 @@ class Match {
 	public $matchDateTime;
 	public $team1Score;
 	public $team2Score;
+	private $teams;
 	private $teamsTable;
 
 	public function __construct(\Ninja\DatabaseTable $teamsTable) {
-		$this->teams = [];
 		$this->teamsTable = $teamsTable;
 	}
 	
-	// This method returns team 1 for the current match
+	// This method returns team 1 or 2 for the current match
 	public function getTeam($teamNumber) {
 
 		if (empty($this->teams[$teamNumber])) {

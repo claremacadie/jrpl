@@ -26,7 +26,7 @@
 			<td><?=$match->matchStage;?></td>
 
 			<td>
-				<a href ="/match/edit?matchId=<?=$match->team1Id?>">Edit</a>
+				<a href ="/match/edit?matchId=<?=$match->matchId?>">Edit</a>
 			</td>
 			<td>
 				<form action="/match/delete" method="post">

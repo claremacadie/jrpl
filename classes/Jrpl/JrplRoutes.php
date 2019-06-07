@@ -15,6 +15,7 @@ class JrplRoutes implements \Ninja\Routes {
 	private $teams;
 	private $groups;
 	private $matches;
+	private $predictions;
 	
 	private $jokesTable;
 	private $categoriesTable;
@@ -24,10 +25,12 @@ class JrplRoutes implements \Ninja\Routes {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
 		// Create instance of DatabaseTables for the user, team and group tables
+		// &$ is used so that it doesn't matter which order tables are created and passed into each other
 		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'userId', '\Jrpl\Entity\user', [&$this->jokesTable]);
 		$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'team', 'teamId', '\Jrpl\Entity\Team', [&$this->groupsTable]);
-		$this->matchesTable = new \Ninja\DatabaseTable($pdo, 'match', 'matchId', '\Jrpl\Entity\Match', [&$this->teamsTable]);
 		$this->groupsTable = new \Ninja\DatabaseTable($pdo, 'group', 'groupId');
+		$this->matchesTable = new \Ninja\DatabaseTable($pdo, 'match', 'matchId', '\Jrpl\Entity\Match', [&$this->teamsTable]);
+		$this->predictionsTable = new \Ninja\DatabaseTable($pdo, 'prediction', 'predictionId', '\Jrpl\Entity\Prediction', [&$this->usersTable, &$this->teamsTable, &$this->matchesTable]);
 		
 		// Create an instance of the Authentication class
 		$this->authentication = new \Ninja\Authentication($this->usersTable, 'email', 'password');		
@@ -50,6 +53,7 @@ class JrplRoutes implements \Ninja\Routes {
 		$teamController = new \Jrpl\Controllers\Team($this->teamsTable, $this->groupsTable);
 		$groupController = new \Jrpl\Controllers\Group($this->groupsTable);
 		$matchController = new \Jrpl\Controllers\Match($this->matchesTable, $this->teamsTable);
+		$predictionController = new \Jrpl\Controllers\Prediction($this->usersTable, $this->teamsTable, $this->matchesTable, $this->predictionsTable);
 
 		$jokeController = new \Jrpl\Controllers\Joke($this->jokesTable, $this->usersTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);
 		$categoryController = new \Jrpl\Controllers\Category($this->categoriesTable);
@@ -59,6 +63,26 @@ class JrplRoutes implements \Ninja\Routes {
 		// They also use 'login' => true to ensure only specific actions are available to logged in users,
 		// and 'permissions' to ensure only specific actions are available to users with appropriate permissions.		
 		$routes = [
+			'prediction/list' => [
+				'GET' => [
+					'controller' => $predictionController, 
+					'action' => 'list']],
+			
+			'prediction/edit' => [
+				'POST' => [
+					'controller' => $predictionController, 
+					'action' => 'saveEdit'],
+				'GET' => [
+					'controller' => $predictionController, 
+					'action' => 'edit'],
+				'login' => true],
+			
+			'prediction/delete' => [
+				'POST' => [
+					'controller' => $predictionController, 
+					'action' => 'delete'],
+				'login' => true],
+				
 			'match/list' => [
 				'GET' => [
 					'controller' => $matchController, 

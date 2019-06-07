@@ -15,8 +15,8 @@
 		<tr>
 			<td><?=$team->teamName;?></td>
 			<?php // use the getGroup method in the team entity to return the name of the group ?>
-			<td><?=$team->getGroup()->groupName;?></td>
-			<td>
+			
+			<td><?=$team->getGroup()->groupName;?></td><td>
 				<a href ="/team/edit?teamId=<?=$team->teamId?>">Edit</a>
 			</td>
 			<td>
