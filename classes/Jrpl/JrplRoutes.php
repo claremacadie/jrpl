@@ -17,16 +17,12 @@ class JrplRoutes implements \Ninja\Routes {
 	private $matches;
 	private $predictions;
 	
-	private $jokesTable;
-	private $categoriesTable;
-	private $jokeCategoriesTable;
-	
 	public function __construct() {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
 		// Create instance of DatabaseTables for the user, team and group tables
 		// &$ is used so that it doesn't matter which order tables are created and passed into each other
-		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'userId', '\Jrpl\Entity\user', [&$this->jokesTable]);
+		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'userId', '\Jrpl\Entity\user', [&$this->predictionsTable]);
 		$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'team', 'teamId', '\Jrpl\Entity\Team', [&$this->groupsTable]);
 		$this->groupsTable = new \Ninja\DatabaseTable($pdo, 'group', 'groupId');
 		$this->matchesTable = new \Ninja\DatabaseTable($pdo, 'match', 'matchId', '\Jrpl\Entity\Match', [&$this->teamsTable]);
@@ -34,15 +30,7 @@ class JrplRoutes implements \Ninja\Routes {
 		
 		// Create an instance of the Authentication class
 		$this->authentication = new \Ninja\Authentication($this->usersTable, 'email', 'password');		
-	
-		//Create instances of DatabaseTables for the joke, user and joke category tables
-		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'jokeId', '\Jrpl\Entity\Joke', [&$this->usersTable, &$this->jokeCategoriesTable]);
-		$this->categoriesTable = new \Ninja\DatabaseTable($pdo, 'category', 'categoryId', '\Jrpl\Entity\Category', [&$this->jokesTable, &$this->jokeCategoriesTable]);
-		
-		//Create instance of DatabaseTables for the joke_category table, 
-		//which stores the many-many relationships between jokes and categories
-		$this->jokeCategoriesTable = new \Ninja\DatabaseTable($pdo, 'joke_category', 'categoryId');	
-		}
+	}
 
 	// This method creates $routes to enable URLs and request methods (_GET or _POST) to determine which method of which controller will be run
 	// It uses type hinting to ensure it is array
@@ -55,9 +43,6 @@ class JrplRoutes implements \Ninja\Routes {
 		$matchController = new \Jrpl\Controllers\Match($this->matchesTable, $this->teamsTable);
 		$predictionController = new \Jrpl\Controllers\Prediction($this->usersTable, $this->teamsTable, $this->matchesTable, $this->predictionsTable);
 
-		$jokeController = new \Jrpl\Controllers\Joke($this->jokesTable, $this->usersTable, $this->categoriesTable, $this->jokeCategoriesTable, $this->authentication);
-		$categoryController = new \Jrpl\Controllers\Category($this->categoriesTable);
-		
 		// These routes appear in the address bar of the browser
 		// They are used to determine which controller and which method ('action') within that controller is called
 		// They also use 'login' => true to ensure only specific actions are available to logged in users,
@@ -66,7 +51,9 @@ class JrplRoutes implements \Ninja\Routes {
 			'prediction/list' => [
 				'GET' => [
 					'controller' => $predictionController, 
-					'action' => 'list']],
+					'action' => 'list'], 
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::LIST_PREDICTIONS],
 			
 			'prediction/edit' => [
 				'POST' => [
@@ -75,13 +62,15 @@ class JrplRoutes implements \Ninja\Routes {
 				'GET' => [
 					'controller' => $predictionController, 
 					'action' => 'edit'],
-				'login' => true],
-			
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_PREDICTIONS],
+
 			'prediction/delete' => [
 				'POST' => [
 					'controller' => $predictionController, 
 					'action' => 'delete'],
-				'login' => true],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_PREDICTIONS],
 				
 			'match/list' => [
 				'GET' => [
@@ -95,13 +84,15 @@ class JrplRoutes implements \Ninja\Routes {
 				'GET' => [
 					'controller' => $matchController, 
 					'action' => 'edit'],
-				'login' => true],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_MATCHES],
 			
 			'match/delete' => [
 				'POST' => [
 					'controller' => $matchController, 
 					'action' => 'delete'],
-				'login' => true],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_MATCHES],
 				
 			'group/list' => [
 				'GET' => [
@@ -115,13 +106,15 @@ class JrplRoutes implements \Ninja\Routes {
 				'GET' => [
 					'controller' => $groupController, 
 					'action' => 'edit'],
-				'login' => true],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_GROUPS],
 			
 			'group/delete' => [
 				'POST' => [
 					'controller' => $groupController, 
 					'action' => 'delete'],
-				'login' => true],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_GROUPS],
 						
 			'team/list' => [
 				'GET' => [
@@ -135,17 +128,19 @@ class JrplRoutes implements \Ninja\Routes {
 				'GET' => [
 					'controller' => $teamController, 
 					'action' => 'edit'],
-				'login' => true],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_TEAMS],
 			
 			'team/delete' => [
 				'POST' => [
 					'controller' => $teamController, 
 					'action' => 'delete'],
-				'login' => true],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_TEAMS],
 						
 			'' => [
 				'GET' => [
-					'controller' => $jokeController, 
+					'controller' => $teamController, 
 					'action' => 'home']],
 					
 			'user/list' => [
@@ -205,51 +200,7 @@ class JrplRoutes implements \Ninja\Routes {
 			'permissions/error' => [
 				'GET' => [
 					'controller' => $userController,
-					'action' => 'error']],
-
-			'joke/edit' => [
-				'POST' => [
-					'controller' => $jokeController, 
-					'action' => 'saveEdit'],
-				'GET' => [
-					'controller' => $jokeController, 
-					'action' => 'edit'],
-				'login' => true],
-			
-			'joke/delete' => [
-				'POST' => [
-					'controller' => $jokeController, 
-					'action' => 'delete'],
-				'login' => true],
-			
-			'joke/list' => [
-				'GET' => [
-					'controller' => $jokeController, 
-					'action' => 'list']],
-			
-			'category/edit' => [
-				'POST' => [
-					'controller' => $categoryController, 
-					'action' => 'saveEdit'],
-				'GET' => [
-					'controller' => $categoryController, 
-					'action' => 'edit'],
-				'login' => true,
-				'permissions' => \Jrpl\Entity\user::EDIT_CATEGORIES],
-			
-			'category/delete' => [
-				'POST' => [
-					'controller' => $categoryController, 
-					'action' => 'delete'],
-				'login' => true,
-				'permissions' => \Jrpl\Entity\user::REMOVE_CATEGORIES],
-				
-			'category/list' => [
-				'GET' => [
-					'controller' => $categoryController, 
-					'action' => 'list'],
-				'login' => true,
-				'permissions' => \Jrpl\Entity\user::LIST_CATEGORIES]
+					'action' => 'error']]
 		];	
 		
 		// Set the output of this function to be $routes

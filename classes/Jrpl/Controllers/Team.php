@@ -74,4 +74,10 @@ class Team {
 		// End this program flow to prevent PHP warning in error log
 		die();
 	}
+
+	//This method sends the browser to the home page
+	public function home() {
+		$title = 'Internet Joke Database';
+		return ['template' => 'home.html.php', 'title' => $title];
+	}
 }

@@ -15,11 +15,11 @@ class user {
 	private $jokesTable;
 	
 	//Define the constants for user permissions
-	const EDIT_JOKES = 1;
-	const DELETE_JOKES = 2;
-	const LIST_CATEGORIES = 4;
-	const EDIT_CATEGORIES = 8;
-	const REMOVE_CATEGORIES = 16;
+	const EDIT_TEAMS = 1;
+	const EDIT_MATCHES = 2;
+	const EDIT_GROUPS = 4;
+	const LIST_PREDICTIONS = 8;
+	const EDIT_PREDICTIONS = 16;
 	const EDIT_USER_ACCESS = 32;	
 	
 	//Create a DatabaseTable object called $jokesTable

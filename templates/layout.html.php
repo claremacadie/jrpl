@@ -15,17 +15,25 @@
 			<ul>
 				<li><a href="/">Home</a></li>
 				<li><a href="/team/list">Teams list</a></li>
-				<li><a href="/team/edit">Add a new team</a></li>
 				<li><a href="/group/list">Groups list</a></li>
-				<li><a href="/group/edit">Add a new group</a></li>
 				<li><a href="/match/list">Matches list</a></li>
-				<li><a href="/match/edit">Add a new match</a></li>
-				<li><a href="/prediction/list">Predictions list</a></li>
 					
+				<?php // Administer teams, matches and predictions are only shown if logged in user has permission to edit these?>
 				<?php // This displays a logout option when a user is logged in and and login option when they are not logged in?>
-				<?php // Administer categories and users is only shown if logged in user has permission to edit these?>
 				<?php if ($loggedIn): ?>
-								
+					
+					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_TEAMS)): ?>
+						<li><a href="/team/edit">Administer teams</a></li>
+					<?php endif; ?>
+					
+					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_MATCHES)): ?>
+						<li><a href="/match/edit">Administer matches</a></li>
+					<?php endif; ?>
+					
+					<?php if ($user->hasPermission(\Jrpl\Entity\user::LIST_PREDICTIONS)): ?>
+						<li><a href="/prediction/list">List predictions</a></li>
+					<?php endif; ?>
+					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_USER_ACCESS)): ?>
 						<li><a href="/user/list">Administer users</a></li>
 					<?php endif; ?>
@@ -33,7 +41,7 @@
 					<li><a href="/logout">Log out</a></li>
 					
 				<?php else: ?>
-					<li><a href="/login">Log in</a></li>
+					<li><a href="/login">Log in or Register new user</a></li>
 				<?php endif; ?>
 	
 			</ul>
