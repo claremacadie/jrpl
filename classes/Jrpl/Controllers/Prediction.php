@@ -24,17 +24,13 @@ class Prediction {
 			$prediction = $this->predictionsTable->findById($_GET['predictionId']);
 		}
 		
-		// $teams is used on the predictionedit.html.php form for a dropdown list
-		$teams = $this->teamsTable->findAll();
-		
-		$title = 'Edit Match';
+		$title = 'Edit Prediction';
 		
 		return [
 			'template' => 'predictionedit.html.php',
 			'title' =>$title,
 			'variables' => [
-				'prediction' => $prediction ?? null,
-				'teams' => $teams]
+				'prediction' => $prediction ?? null]
 		];
 	}
 	
@@ -43,11 +39,11 @@ class Prediction {
 		$prediction = $_POST['prediction'];
 
 		// This allows no team to be selected in the prediction edit page
-		if ($prediction['team1Id'] == '') {
-			$prediction['team1Id'] = null;
+		if ($prediction['team1Prediction'] == '') {
+			$prediction['team1Prediction'] = null;
 		}
-		if ($prediction['team2Id'] == '') {
-			$prediction['team2Id'] = null;
+		if ($prediction['team2Prediction'] == '') {
+			$prediction['team2Prediction'] = null;
 		}
 
 		$this->predictionsTable->save($prediction);
@@ -71,8 +67,7 @@ class Prediction {
 			'template' => 'predictionlist.html.php',
 			'title' => $title,
 			'variables' => [
-				'predictions' => $predictions,
-				'teams' => $teams]
+				'predictions' => $predictions]
 		];
 	}
 			
