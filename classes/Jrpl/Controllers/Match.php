@@ -38,12 +38,24 @@ class Match {
 	public function saveEdit() {
 		$match = $_POST['match'];
 
-		// This allows no team to be selected in the match edit page
+		// This allows no team, no datetime, no score and no stage to be selected in the match edit page
 		if ($match['team1Id'] == '') {
 			$match['team1Id'] = null;
 		}
 		if ($match['team2Id'] == '') {
 			$match['team2Id'] = null;
+		}
+		if ($match['matchDateTime'] == '') {
+			$match['matchDateTime'] = null;
+		}
+		if ($match['team1Score'] == '') {
+			$match['team1Score'] = null;
+		}
+		if ($match['team2Score'] == '') {
+			$match['team2Score'] = null;
+		}
+		if ($match['matchStage'] == '') {
+			$match['matchStage'] = null;
 		}
 
 		$this->matchesTable->save($match);
