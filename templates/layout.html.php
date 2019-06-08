@@ -26,6 +26,10 @@
 						<li><a href="/team/edit">Administer teams</a></li>
 					<?php endif; ?>
 					
+					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_GROUPS)): ?>
+						<li><a href="/group/edit">Administer groups</a></li>
+					<?php endif; ?>
+					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_MATCHES)): ?>
 						<li><a href="/match/edit">Administer matches</a></li>
 					<?php endif; ?>
