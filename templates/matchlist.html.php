@@ -1,13 +1,13 @@
 <?php // Template for the match list?>
 
-<h2>Match List</h2>
+<h2>Fixtures</h2>
 
 <table>
 	<thead>
 		<th>Team1 Flag</th>
 		<th>Team1 Name</th>
-		<th>Team2 Flag</th>
 		<th>Team2 Name</th>
+		<th>Team2 Flag</th>
 		<th>DateTime</th>
 		<th>Team1 Score</th>
 		<th>Team2 Score</th>
@@ -22,6 +22,7 @@
 			<td><img src="/images/<?=$match->getTeam(1)->teamFlag;?>" height=50 width=50/></td>
 			<td><?=$match->getTeam(1)->teamName;?></td>
 			<td><?=$match->getTeam(2)->teamName;?></td>
+			<td><img src="/images/<?=$match->getTeam(2)->teamFlag;?>" height=50 width=50/></td>
 			
 			<td><?=$match->matchDateTime;?></td>
 			<td><?=$match->team1Score;?></td>
