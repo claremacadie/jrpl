@@ -19,7 +19,6 @@ class Match {
 	
 	// This method returns team 1 or 2 for the current match
 	public function getTeam($teamNumber) {
-
 		if (empty($this->teams[$teamNumber])) {
 			$teamProperty = 'team' . $teamNumber . 'Id';
 			$this->teams[$teamNumber] = $this->teamsTable->findById($this->{$teamProperty});

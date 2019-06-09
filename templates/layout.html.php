@@ -23,15 +23,15 @@
 				<?php if ($loggedIn): ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_TEAMS)): ?>
-						<li><a href="/team/edit">Administer teams</a></li>
+						<li><a href="/team/edit">Add team</a></li>
 					<?php endif; ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_GROUPS)): ?>
-						<li><a href="/group/edit">Administer groups</a></li>
+						<li><a href="/group/edit">Add group</a></li>
 					<?php endif; ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_MATCHES)): ?>
-						<li><a href="/match/edit">Administer matches</a></li>
+						<li><a href="/match/edit">Add match</a></li>
 					<?php endif; ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::LIST_PREDICTIONS)): ?>

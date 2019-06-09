@@ -31,6 +31,15 @@
 		<?php endforeach; ?>
 	</select>
 	
+	<label for="teamflag">Enter team flag filename:</label>
+	
+	<input 
+		type="text"
+		id="teamflag"
+		name="team[teamFlag]"
+		value="<?=$team->teamFlag ?? ''?>"
+	/>
+
 	<input
 		type="submit"
 		name="submit"
