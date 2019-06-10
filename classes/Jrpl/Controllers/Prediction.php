@@ -51,7 +51,7 @@ class Prediction {
 		$this->predictionsTable->save($prediction);
 		
 		// Redirect browser to prediction/list webpage
-		header('location: /prediction/list');
+		header('location: /prediction/usermatchpredictions');
 		
 		// End this program flow to prevent PHP warning in error log
 		die();

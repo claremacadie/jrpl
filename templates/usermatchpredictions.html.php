@@ -34,18 +34,24 @@
 			<td><?=$match->team1Score;?></td>
 			<td><?=$match->team2Score;?></td>
 			
-			<td><?=$prediction->team1Prediction;?></td>
-			<td><?=$prediction->team2Prediction;?></td>
+			<?php // When a user is logged in and if the matchId matches the matchId of a prediction, the predictions are displayed, ?>
+			<?php // else 'no prediction' is displayed?>	
+			<?php if ($user): ?>
+				<?php foreach ($predictions as $prediction): ?>
+					<?php if ($match->matchId  == $prediction->matchId): ?>
+						<td><?=$prediction->team1Prediction;?></td>
+						<td><?=$prediction->team2Prediction;?></td>
+					<?php else: ?>
+						<td>No prediction</td>
+						<td>No prediction</td>
+					<?php endif; ?>
+				<?php endforeach; ?>				
+			<?php endif; ?>
+
 			<td><?=$prediction->userPredictionPoints;?></td>
 
 			<td>
 				<a href ="/prediction/edit?predictionId=<?=$prediction->predictionId?>">Edit</a>
-			</td>
-			<td>
-				<form action="/prediction/delete" method="post">
-					<input type="hidden" name="predictionId" value="<?=$prediction->predictionId?>">
-					<input type="submit" value="Delete">
-				</form>
 			</td>
 		</tr>
 		<?php endforeach; ?>
