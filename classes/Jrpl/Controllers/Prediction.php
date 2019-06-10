@@ -9,12 +9,14 @@ class Prediction {
 	private $teamsTable;
 	private $matchesTable;
 	private $predictionsTable;
+	private $authentication;
 	
-	public function __construct(\Ninja\DatabaseTable $usersTable, \Ninja\DatabaseTable $teamsTable, \Ninja\DatabaseTable $matchesTable, \Ninja\DatabaseTable $predictionsTable) {
+	public function __construct(\Ninja\DatabaseTable $usersTable, \Ninja\DatabaseTable $teamsTable, \Ninja\DatabaseTable $matchesTable, \Ninja\DatabaseTable $predictionsTable, \Ninja\Authentication $authentication) {
 		$this->usersTable = $usersTable;
 		$this->teamsTable = $teamsTable;
 		$this->matchesTable = $matchesTable;
 		$this->predictionsTable = $predictionsTable;
+		$this->authentication = $authentication;
 	}
 	
 	// If an id is set, this method finds the prediction in the database and returns it to the form to be edited
@@ -55,14 +57,30 @@ class Prediction {
 		die();
 	}	
 
+	// This method lists all the matches with the logged in user's predictions
+	public function usermatchpredictions() {
+		$predictions = $this->predictionsTable->findAll();
+		$matches = $this->matchesTable->findAll();
+		
+		// Get the currently logged in user
+		$user = $this->authentication->getUser();
+		
+		$title = 'User match predictions';
+		return [
+			'template' => 'usermatchpredictions.html.php',
+			'title' => $title,
+			'variables' => [
+				'user' => $user,
+				'matches' => $matches,
+				'predictions' => $predictions]
+		];
+	}
+			
 	// This method lists the predictions and the template enables them to be edited and deleted
 	public function list() {
 		$predictions = $this->predictionsTable->findAll();
 		
-		// $teams is used on the predictionlist.html.php to get team names using the prediction entity
-		$teams = $this->teamsTable->findAll();
-		
-		$title = 'Predictions';
+		$title = 'Predictions list';
 		return [
 			'template' => 'predictionlist.html.php',
 			'title' => $title,

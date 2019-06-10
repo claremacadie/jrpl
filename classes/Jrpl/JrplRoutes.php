@@ -26,7 +26,7 @@ class JrplRoutes implements \Ninja\Routes {
 		$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'team', 'teamId', '\Jrpl\Entity\Team', [&$this->groupsTable]);
 		$this->groupsTable = new \Ninja\DatabaseTable($pdo, 'group', 'groupId');
 		$this->matchesTable = new \Ninja\DatabaseTable($pdo, 'match', 'matchId', '\Jrpl\Entity\Match', [&$this->teamsTable]);
-		$this->predictionsTable = new \Ninja\DatabaseTable($pdo, 'prediction', 'predictionId', '\Jrpl\Entity\Prediction', [&$this->usersTable, &$this->teamsTable, &$this->matchesTable]);
+		$this->predictionsTable = new \Ninja\DatabaseTable($pdo, 'prediction', 'predictionId', '\Jrpl\Entity\Prediction', [&$this->usersTable, &$this->teamsTable, &$this->matchesTable, &$this->authentication]);
 		
 		// Create an instance of the Authentication class
 		$this->authentication = new \Ninja\Authentication($this->usersTable, 'email', 'password');		
@@ -41,13 +41,19 @@ class JrplRoutes implements \Ninja\Routes {
 		$teamController = new \Jrpl\Controllers\Team($this->teamsTable, $this->groupsTable);
 		$groupController = new \Jrpl\Controllers\Group($this->groupsTable);
 		$matchController = new \Jrpl\Controllers\Match($this->matchesTable, $this->teamsTable);
-		$predictionController = new \Jrpl\Controllers\Prediction($this->usersTable, $this->teamsTable, $this->matchesTable, $this->predictionsTable);
+		$predictionController = new \Jrpl\Controllers\Prediction($this->usersTable, $this->teamsTable, $this->matchesTable, $this->predictionsTable, $this->authentication);
 
 		// These routes appear in the address bar of the browser
 		// They are used to determine which controller and which method ('action') within that controller is called
 		// They also use 'login' => true to ensure only specific actions are available to logged in users,
 		// and 'permissions' to ensure only specific actions are available to users with appropriate permissions.		
 		$routes = [
+			'prediction/usermatchpredictions' => [
+				'GET' => [
+					'controller' => $predictionController, 
+					'action' => 'usermatchpredictions'], 
+				'login' => true],
+			
 			'prediction/list' => [
 				'GET' => [
 					'controller' => $predictionController, 

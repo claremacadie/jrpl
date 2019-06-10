@@ -16,7 +16,8 @@
 				<li><a href="/">Home</a></li>
 				<li><a href="/team/list">Teams list</a></li>
 				<li><a href="/group/list">Groups list</a></li>
-				<li><a href="/match/list">Fixtures</a></li>
+				<li><a href="/match/list">Match list</a></li>
+				<li><a href="/prediction/usermatchpredictions">Fixtures</a></li>
 					
 				<?php // Administer teams, matches and predictions are only shown if logged in user has permission to edit these?>
 				<?php // This displays a logout option when a user is logged in and and login option when they are not logged in?>

@@ -53,7 +53,6 @@ class Login
 		];
 	}
 	
-	
 	//This sets the template and title when there is an error logging in
 	//This is used when a user tries to change the database before they have logged in
 	public function error()
@@ -71,6 +70,4 @@ class Login
 			'template' => 'logout.html.php',
 			'title' => 'You have been logged out'];
 	}
-	
-	
 }

@@ -37,4 +37,12 @@ class Prediction {
 		}
 		return $this->user;
 	}	
+	
+	// This method returns the match for the current prediction
+	public function getMatch() {
+		if (empty($this->match)) {
+			$this->match = $this->matchesTable->findById($this->matchId);
+		}
+		return $this->match;
+	}	
 }
