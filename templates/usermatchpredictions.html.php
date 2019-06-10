@@ -34,11 +34,12 @@
 			<td><?=$match->team1Score;?></td>
 			<td><?=$match->team2Score;?></td>
 			
-			<?php // When a user is logged in and if the matchId matches the matchId of a prediction, the predictions are displayed, ?>
+			<?php // When a user is logged in and if the matchId matches the matchId of a prediction, and ?>
+			<?php // the userId matches the userId of a prediction, then the predictions are displayed, ?>
 			<?php // else 'no prediction' is displayed?>	
 			<?php if ($user): ?>
 				<?php foreach ($predictions as $prediction): ?>
-					<?php if ($match->matchId  == $prediction->matchId): ?>
+					<?php if ($match->matchId  == $prediction->matchId && $user->userId == $prediction->userId): ?>
 						<td><?=$prediction->team1Prediction;?></td>
 						<td><?=$prediction->team2Prediction;?></td>
 					<?php else: ?>
