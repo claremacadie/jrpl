@@ -99,6 +99,36 @@ class DatabaseTable {
 		// return $sql->fetchAll();
 		return $sql->fetchAll(\PDO::FETCH_CLASS, $this->className, $this->constructorArgs);
 	}
+	
+	// This method finds all records where two columns match two values
+	// This can be used to find a prediction that matches a userId and matchId
+	// If $orderBy is set, the result will be ordered
+	// If $limit is set, only the first $limit rows will be returned (e.g. $limit = 10, only the first 10 will be returned)
+	// If $offset if set, e.g. 6 when $limit =10, then records 6 to 15 will be returned
+	public function findTwoColumns($column1, $value1, $column2, $value2, $orderBy = null, $limit = null, $offset = null) {
+		
+		$sql = 'SELECT * FROM `' . $this->table . '` WHERE `' . $column1 . '` = :value1 AND `' . $column2 . '` = :value2';
+		
+		$parameters = ['value1' => $value1, 'value2' => $value2];
+		
+		if ($orderBy !=null) {
+			$sql .= ' ORDER BY ' . $orderBy;
+		}
+		
+		if ($limit !=null) {
+			$sql .= ' LIMIT ' . $limit;
+		}
+		
+		if ($offset !=null) {
+			$sql .= ' OFFSET ' . $offset;
+		}
+		
+		$sql = $this->query($sql, $parameters);
+		
+		// fetchAll returns an array (rather than an single value like fetch) 
+		// so [0] ensures just the first row is returned
+		return $sql->fetchAll(\PDO::FETCH_CLASS, $this->className, $this->constructorArgs)[0];
+	}
 
 	// This method retrieves all records from any database table, ordered and offset if required
 	// The query it creates looks like:

@@ -22,8 +22,20 @@ class Prediction {
 	// If an id is set, this method finds the prediction in the database and returns it to the form to be edited
 	// If no id is set, then the form is blank
 	public function edit() {
+
+		// Set $user to the logged in user
+		$user = $this->authentication->getUser();
+		 
+		// Set $matches to be the list of all matches
+		$matches = $this->matchesTable->findAll();
+
 		if (isset($_GET['predictionId'])) {
 			$prediction = $this->predictionsTable->findById($_GET['predictionId']);
+			$match = $prediction->getMatch();
+		}
+		
+		if (isset($_GET['matchId'])) {
+			$match = $this->matchesTable->findById($_GET['matchId']);
 		}
 		
 		$title = 'Edit Prediction';
@@ -32,6 +44,9 @@ class Prediction {
 			'template' => 'predictionedit.html.php',
 			'title' =>$title,
 			'variables' => [
+				'user' => $user,
+				'match' => $match,
+				'matches' => $matches,
 				'prediction' => $prediction ?? null]
 		];
 	}
@@ -48,7 +63,10 @@ class Prediction {
 			$prediction['team2Prediction'] = null;
 		}
 
-		$this->predictionsTable->save($prediction);
+		//Set $user to the logged in user
+		$user = $this->authentication->getUser();
+
+		$user->addPrediction($prediction);
 		
 		// Redirect browser to prediction/list webpage
 		header('location: /prediction/usermatchpredictions');

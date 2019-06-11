@@ -35,25 +35,24 @@
 			<td><?=$match->team2Score;?></td>
 			
 			<?php // When a user is logged in and if the matchId matches the matchId of a prediction, and ?>
-			<?php // the userId matches the userId of a prediction, then the predictions are displayed, ?>
-			<?php // else 'no prediction' is displayed?>	
+			<?php // the userId matches the userId of a prediction, then the predictions are displayed and can be edited, ?>
+			<?php // else 'no prediction' is displayed and a new prediction created ?>	
 			<?php if ($user): ?>
-				<?php foreach ($predictions as $prediction): ?>
-					<?php if ($match->matchId  == $prediction->matchId && $user->userId == $prediction->userId): ?>
-						<td><?=$prediction->team1Prediction;?></td>
-						<td><?=$prediction->team2Prediction;?></td>
-					<?php else: ?>
+				<?php // write get users prediction for a matchId ?>
+				<?php if($match->getUserPredictions($user->userId)): ?>
+					<td><?=$match->getUserPredictions($user->userId)->team1Prediction;?></td>
+					<td><?=$match->getUserPredictions($user->userId)->team2Prediction;?></td>
+					<td><?=$match->getUserPredictions($user->userId)->userPredictionPoints;?></td>
+					<td><a href ="/prediction/edit?predictionId=<?=$match->getUserPredictions($user->userId)->predictionId?>">Edit prediction</a></td>
+				<?php else: ?>
 						<td>No prediction</td>
 						<td>No prediction</td>
-					<?php endif; ?>
-				<?php endforeach; ?>				
+						<td>-</td>
+						<td><a href ="/prediction/edit?matchId=<?=$match->matchId?>">Add prediction</a></td>
+				<?php endif; ?>				
 			<?php endif; ?>
 
-			<td><?=$prediction->userPredictionPoints;?></td>
 
-			<td>
-				<a href ="/prediction/edit?predictionId=<?=$prediction->predictionId?>">Edit</a>
-			</td>
 		</tr>
 		<?php endforeach; ?>
 	</body>

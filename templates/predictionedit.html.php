@@ -7,8 +7,16 @@
 		name="prediction[predictionId]"
 		value="<?=$prediction->predictionId ?? ''?>"
 	/>
-	<h2><?=$prediction->getUser()->userName?>'s Predictions</h2>
-	<label for="team1prediction"><?=$prediction->getTeam(1)->teamName?> Prediction:</label>
+	
+	<?php // This passes in the matchId so that it can be used by the addPrediction method to create a prediction with the correct matchId ?>
+	<?php // userId doesn't have to be passed in because it is already in the user entity that contains the addPrediction method ?>
+	<input 
+		type="hidden"
+		name="prediction[matchId]"
+		value="<?=$match->matchId ?? ''?>"
+	/>
+	
+	<label for="team1prediction"><?=$match->getTeam(1)->teamName?> Prediction:</label>
 	<input 
 		type="text"
 		id="team1prediction"
@@ -16,7 +24,7 @@
 		value="<?=$prediction->team1Prediction ?? ''?>"
 	/>
 
-	<label for="team2prediction"><?=$prediction->getTeam(2)->teamName?> Prediction:</label>
+	<label for="team2prediction"><?=$match->getTeam(2)->teamName?> Prediction:</label>
 	<input 
 		type="text"
 		id="team2prediction"

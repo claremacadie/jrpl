@@ -25,7 +25,7 @@ class JrplRoutes implements \Ninja\Routes {
 		$this->usersTable = new \Ninja\DatabaseTable($pdo, 'user', 'userId', '\Jrpl\Entity\user', [&$this->predictionsTable]);
 		$this->teamsTable = new \Ninja\DatabaseTable($pdo, 'team', 'teamId', '\Jrpl\Entity\Team', [&$this->groupsTable]);
 		$this->groupsTable = new \Ninja\DatabaseTable($pdo, 'group', 'groupId');
-		$this->matchesTable = new \Ninja\DatabaseTable($pdo, 'match', 'matchId', '\Jrpl\Entity\Match', [&$this->teamsTable]);
+		$this->matchesTable = new \Ninja\DatabaseTable($pdo, 'match', 'matchId', '\Jrpl\Entity\Match', [&$this->teamsTable, &$this->predictionsTable]);
 		$this->predictionsTable = new \Ninja\DatabaseTable($pdo, 'prediction', 'predictionId', '\Jrpl\Entity\Prediction', [&$this->usersTable, &$this->teamsTable, &$this->matchesTable, &$this->authentication]);
 		
 		// Create an instance of the Authentication class
