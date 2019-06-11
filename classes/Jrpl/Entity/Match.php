@@ -12,6 +12,7 @@ class Match {
 	public $team2Score;
 	private $teams;
 	private $teamsTable;
+	private $prediction;
 	private $predictionsTable;
 
 	public function __construct(\Ninja\DatabaseTable $teamsTable, \Ninja\DatabaseTable $predictionsTable) {
@@ -28,11 +29,12 @@ class Match {
 		return $this->teams[$teamNumber];
 	}	
 	
-	// This method returns a loggedin user's predictions
-	public function getUserPredictions($userId) {
-		if (empty($this->predictions)) {
-			$this->predictions = $this->predictionsTable->findTwoColumns('userId', $userId, 'matchId', $this->matchId);
+	// This method returns a loggedin user's prediction for a given matchId
+	public function getUserPrediction($userId) {
+		if (empty($this->prediction)) {
+			// [0] is used to turn the array into a single row
+			$this->prediction = $this->predictionsTable->find(['userId', 'matchId'], [$userId, $this->matchId])[0];
 		}
-		return $this->predictions;
+		return $this->prediction;
 	}	
 }

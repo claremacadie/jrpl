@@ -11,7 +11,6 @@
 		<th>Team1 Prediction</th>
 		<th>Team2 Prediction</th>
 		<th>Prediction Points</th>
-		<th>Edit</th>
 	</thead>
 	
 	<body>
@@ -35,9 +34,6 @@
 			<td><?=$prediction->team2Prediction;?></td>
 			<td><?=$prediction->userPredictionPoints;?></td>
 
-			<td>
-				<a href ="/prediction/edit?predictionId=<?=$prediction->predictionId?>">Edit</a>
-			</td>
 			<td>
 				<form action="/prediction/delete" method="post">
 					<input type="hidden" name="predictionId" value="<?=$prediction->predictionId?>">

@@ -76,9 +76,23 @@ class DatabaseTable {
 	// If $offset if set, e.g. 6 when $limit =10, then records 6 to 15 will be returned
 	public function find($column, $value, $orderBy = null, $limit = null, $offset = null) {
 		
-		$sql = 'SELECT * FROM `' . $this->table . '` WHERE `' . $column . '` = :value';
-		
-		$parameters = ['value' => $value];
+		// Check whether $column and $value are single values to find a match for, or
+		// arrays to find several column matches in a database
+		if (is_array($column)) {
+			$sql = 'SELECT * FROM `' . $this->table . '` WHERE';
+			
+			// Loop through each column entry
+			foreach ($column as $key=>$col){
+				$sql .= '`' . $col . '` = :value'.$key . ' AND ';
+				$parameters['value'.$key] = $value[$key];
+			}
+			// Remove 'AND' from the last iteration so the $sql query doesn't end in an 'AND'
+			$sql = rtrim($sql, ' AND ');
+		}
+		else {
+			$sql = 'SELECT * FROM `' . $this->table . '` WHERE `' . $column . '` = :value';
+			$parameters = ['value' => $value];
+		}
 		
 		if ($orderBy !=null) {
 			$sql .= ' ORDER BY ' . $orderBy;

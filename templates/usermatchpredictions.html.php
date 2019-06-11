@@ -38,12 +38,12 @@
 			<?php // the userId matches the userId of a prediction, then the predictions are displayed and can be edited, ?>
 			<?php // else 'no prediction' is displayed and a new prediction created ?>	
 			<?php if ($user): ?>
-				<?php // write get users prediction for a matchId ?>
-				<?php if($match->getUserPredictions($user->userId)): ?>
-					<td><?=$match->getUserPredictions($user->userId)->team1Prediction;?></td>
-					<td><?=$match->getUserPredictions($user->userId)->team2Prediction;?></td>
-					<td><?=$match->getUserPredictions($user->userId)->userPredictionPoints;?></td>
-					<td><a href ="/prediction/edit?predictionId=<?=$match->getUserPredictions($user->userId)->predictionId?>">Edit prediction</a></td>
+				<?php // Use getUserPrediction method on the match entity to return a user's predictions, if they have been submitted ?>
+				<?php if($match->getUserPrediction($user->userId)): ?>
+					<td><?=$match->getUserPrediction($user->userId)->team1Prediction;?></td>
+					<td><?=$match->getUserPrediction($user->userId)->team2Prediction;?></td>
+					<td><?=$match->getUserPrediction($user->userId)->userPredictionPoints;?></td>
+					<td><a href ="/prediction/edit?predictionId=<?=$match->getUserPrediction($user->userId)->predictionId?>">Edit prediction</a></td>
 				<?php else: ?>
 						<td>No prediction</td>
 						<td>No prediction</td>
