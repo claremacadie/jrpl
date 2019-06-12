@@ -63,21 +63,16 @@ class Prediction {
 	public function saveEdit() {
 		$prediction = $_POST['prediction'];
 
-		// This allows no team to be selected in the prediction edit page
-		if ($prediction['team1Prediction'] == '') {
-			$prediction['team1Prediction'] = null;
-		}
-		if ($prediction['team2Prediction'] == '') {
-			$prediction['team2Prediction'] = null;
-		}
-
 		//Set $user to the logged in user
 		$user = $this->authentication->getUser();
 
-		$user->addPrediction($prediction);
+		// This uses the addPrediction method in the user entity to add the prediction to the database
+		// As a by-product, this converts the $prediction array created by the edit page into an entity
+		// This prediction entity can then be used in the redirect URL below
+		$prediction = $user->addPrediction($prediction);
 		
-		// Redirect browser to prediction/list webpage
-		header('location: /prediction/usermatchpredictions');
+		// Redirect browser to display prediction edit page again
+		header('location: /prediction/edit?predictionId=' . $prediction->predictionId);
 		
 		// End this program flow to prevent PHP warning in error log
 		die();
