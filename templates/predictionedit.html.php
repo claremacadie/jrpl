@@ -1,5 +1,23 @@
-<?php // This creates the form for adding and editing predictions?>
+<?php // This creates the form for adding and editing predictions ?>
 <?php // Don't change id=, or name= in the input<>, these do not relate to database column titles!?>
+
+<?php // Create a carousel to navigate to previous and next match ?>
+<?php // The initial if($previousMatch) checks that there is a next match to go to, and only display the link if it exists ?>
+<?php if($previousMatch): ?>
+	<?php if($previousMatch->getUserPrediction($user->userId)): ?>
+		<td><a href ="/prediction/edit?predictionId=<?=$previousMatch->getUserPrediction($user->userId)->predictionId?>">Previous match</a></td>
+	<?php else: ?>
+		<td><a href ="/prediction/edit?matchId=<?=$previousMatch->matchId?>">Previous match</a></td>
+	<?php endif; ?>	
+<?php endif; ?>	
+<?php // The initial if($nextMatch) checks that there is a next match to go to, and only display the link if it exists ?>
+<?php if($nextMatch): ?>
+	<?php if($nextMatch->getUserPrediction($user->userId)): ?>
+		<td><a href ="/prediction/edit?predictionId=<?=$nextMatch->getUserPrediction($user->userId)->predictionId?>">Next match</a></td>
+	<?php else: ?>
+		<td><a href ="/prediction/edit?matchId=<?=$nextMatch->matchId?>">Next match</a></td>
+	<?php endif; ?>	
+<?php endif; ?>	
 
 <form action="" method="post">
 	<input 

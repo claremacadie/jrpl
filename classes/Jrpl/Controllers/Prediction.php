@@ -38,6 +38,12 @@ class Prediction {
 			$match = $this->matchesTable->findById($_GET['matchId']);
 		}
 		
+		// Set $nextMatch for the carousel on the predictionedit page to navigate to the next match in order of matchDateTime
+		$nextMatch = $this->matchesTable->findNextRecord($match, 'matchDateTime');
+		
+		// Set $previousMatch for the carousel on the predictionedit page to navigate to the previous match in order of matchDateTime
+		$previousMatch = $this->matchesTable->findPreviousRecord($match, 'matchDateTime');
+		
 		$title = 'Edit Prediction';
 		
 		return [
@@ -46,6 +52,8 @@ class Prediction {
 			'variables' => [
 				'user' => $user,
 				'match' => $match,
+				'nextMatch' => $nextMatch,
+				'previousMatch' => $previousMatch,
 				'matches' => $matches,
 				'prediction' => $prediction ?? null]
 		];

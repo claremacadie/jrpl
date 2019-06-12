@@ -52,7 +52,6 @@
 				<?php endif; ?>				
 			<?php endif; ?>
 
-
 		</tr>
 		<?php endforeach; ?>
 	</body>
