@@ -105,9 +105,9 @@ class Register {
 		}
 	}
 	
-	//This method fetches a list of all the registered users and passes them to the template
+	//This method fetches a list of all the registered users, ordered by userName, and passes them to the template
 	public function list() {
-		$users = $this->usersTable->findAll();
+		$users = $this->usersTable->findAll(userName);
 		return [
 			'template' => 'userlist.html.php',
 			'title' => 'user list',

@@ -67,9 +67,9 @@ class Match {
 		die();
 	}	
 
-	// This method lists the matches and the template enables them to be edited and deleted
+	// This method lists the matches, ordered by matchDateTime, and the template enables them to be edited and deleted
 	public function list() {
-		$matches = $this->matchesTable->findAll();
+		$matches = $this->matchesTable->findAll('matchDateTime');
 		$title = 'Matches';
 		return [
 			'template' => 'matchlist.html.php',

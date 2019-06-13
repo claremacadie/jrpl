@@ -40,9 +40,9 @@ class Group {
 		die();
 	}	
 
-	// This method lists the groups and the template enables them to be edited and deleted
+	// This method lists the groups, orderedy by groupName, and the template enables them to be edited and deleted
 	public function list() {
-		$groups = $this->groupsTable->findAll();
+		$groups = $this->groupsTable->findAll(groupName);
 		$title = 'Groups';
 		return [
 			'template' => 'grouplist.html.php',

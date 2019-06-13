@@ -53,9 +53,9 @@ class Team {
 		die();
 	}	
 
-	// This method lists the teams and the template enables them to be edited and deleted
+	// This method lists the teams, ordered by groupId, and the template enables them to be edited and deleted
 	public function list() {
-		$teams = $this->teamsTable->findAll();
+		$teams = $this->teamsTable->findAll('groupId');
 		$title = 'Teams';
 		return [
 			'template' => 'teamlist.html.php',

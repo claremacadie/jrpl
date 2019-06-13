@@ -78,10 +78,11 @@ class Prediction {
 		die();
 	}	
 
-	// This method lists all the matches with the logged in user's predictions
+	// This method lists all the matches, ordered by matchDateTime, with the logged in user's predictions
 	public function usermatchpredictions() {
-		$predictions = $this->predictionsTable->findAll();
-		$matches = $this->matchesTable->findAll();
+
+		// Get all the matches 
+		$matches = $this->matchesTable->findAll('matchDateTime');
 		
 		// Get the currently logged in user
 		$user = $this->authentication->getUser();
@@ -92,8 +93,7 @@ class Prediction {
 			'title' => $title,
 			'variables' => [
 				'user' => $user,
-				'matches' => $matches,
-				'predictions' => $predictions]
+				'matches' => $matches]
 		];
 	}
 			
