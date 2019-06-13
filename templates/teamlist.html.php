@@ -3,6 +3,8 @@
 
 <h2>Team List</h2>
 
+<a href="/team/edit">Add team</a>
+
 <table>
 	<thead>
 		<th>Flag</th>

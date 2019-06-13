@@ -1,6 +1,7 @@
 <?php // Template for the match list?>
 
 <h2>Match list</h2>
+<a href="/match/edit">Add match</a>
 
 <table>
 	<thead>

@@ -81,7 +81,9 @@ class JrplRoutes implements \Ninja\Routes {
 			'match/list' => [
 				'GET' => [
 					'controller' => $matchController, 
-					'action' => 'list']],
+					'action' => 'list'],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_MATCHES],
 			
 			'match/edit' => [
 				'POST' => [
@@ -103,7 +105,9 @@ class JrplRoutes implements \Ninja\Routes {
 			'group/list' => [
 				'GET' => [
 					'controller' => $groupController, 
-					'action' => 'list']],
+					'action' => 'list'],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_GROUPS],
 			
 			'group/edit' => [
 				'POST' => [
@@ -125,7 +129,9 @@ class JrplRoutes implements \Ninja\Routes {
 			'team/list' => [
 				'GET' => [
 					'controller' => $teamController, 
-					'action' => 'list']],
+					'action' => 'list'],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_TEAMS],
 			
 			'team/edit' => [
 				'POST' => [

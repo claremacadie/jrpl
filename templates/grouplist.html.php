@@ -2,6 +2,7 @@
 <?php // $group->groupName, groupName is the title of the column in the database?>
 
 <h2>Group List</h2>
+<a href="/group/edit">Add group</a>
 
 <table>
 	<thread>

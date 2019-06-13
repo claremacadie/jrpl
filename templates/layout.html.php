@@ -14,9 +14,6 @@
 		<nav>
 			<ul>
 				<li><a href="/">Home</a></li>
-				<li><a href="/team/list">Teams list</a></li>
-				<li><a href="/group/list">Groups list</a></li>
-				<li><a href="/match/list">Match list</a></li>
 				<li><a href="/prediction/usermatchpredictions">Fixtures</a></li>
 					
 				<?php // Administer teams, matches and predictions are only shown if logged in user has permission to edit these?>
@@ -24,23 +21,23 @@
 				<?php if ($loggedIn): ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_TEAMS)): ?>
-						<li><a href="/team/edit">Add team</a></li>
+						<li><a href="/team/list">Teams admin</a></li>
 					<?php endif; ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_GROUPS)): ?>
-						<li><a href="/group/edit">Add group</a></li>
+						<li><a href="/group/list">Groups admin</a></li>
 					<?php endif; ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_MATCHES)): ?>
-						<li><a href="/match/edit">Add match</a></li>
+						<li><a href="/match/list">Matches admin</a></li>
 					<?php endif; ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::LIST_PREDICTIONS)): ?>
-						<li><a href="/prediction/list">List predictions</a></li>
+						<li><a href="/prediction/list">Predictions admin</a></li>
 					<?php endif; ?>
 					
 					<?php if ($user->hasPermission(\Jrpl\Entity\user::EDIT_USER_ACCESS)): ?>
-						<li><a href="/user/list">Administer users</a></li>
+						<li><a href="/user/list">Users admin</a></li>
 					<?php endif; ?>
 											
 					<li><a href="/logout">Log out</a></li>
