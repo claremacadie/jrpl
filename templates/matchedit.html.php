@@ -35,22 +35,6 @@
 		name="match[matchDateTime]"
 		value="<?=$match->matchDateTime ?? ''?>"
 	/>
-
-	<label for="matchteam1score">Team 1 Score:</label>
-	<input 
-		type="text"
-		id="matchteam1score"
-		name="match[team1Score]"
-		value="<?=$match->team1Score ?? ''?>"
-	/>
-
-	<label for="matchteam2score">Team 2 Score:</label>
-	<input 
-		type="text"
-		id="matchteam2score"
-		name="match[team2Score]"
-		value="<?=$match->team2Score ?? ''?>"
-	/>
 	
 	<label for="matchstage">Stage</label>
 	<input 

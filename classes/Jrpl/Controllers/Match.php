@@ -13,6 +13,32 @@ class Match {
 		$this->teamsTable = $teamsTable;
 	}
 	
+	// If an id is set, this method finds the match in the database and returns it to the form
+	public function editScore() {
+		$match = $this->matchesTable->findById($_GET['matchId']);
+		
+		$title = 'Submit score';
+		
+		return [
+			'template' => 'matchscore.html.php',
+			'title' =>$title,
+			'variables' => ['match' => $match ?? null]
+		];
+	}
+	
+	// This method uses the DatabaseTable save method to submit the match score
+	public function submitScore() {
+		$match = $_POST['match'];
+
+		$this->matchesTable->save($match);
+		
+		// Redirect browser to match/list webpage
+		header('location: /match/list');
+		
+		// End this program flow to prevent PHP warning in error log
+		die();
+	}
+
 	// If an id is set, this method finds the match in the database and returns it to the form to be edited
 	// If no id is set, then the form is blank
 	public function edit() {

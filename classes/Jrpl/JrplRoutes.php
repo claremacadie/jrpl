@@ -85,6 +85,16 @@ class JrplRoutes implements \Ninja\Routes {
 				'login' => true,
 				'permissions' => \Jrpl\Entity\user::EDIT_MATCHES],
 			
+			'match/score' => [
+				'POST' => [
+					'controller' => $matchController, 
+					'action' => 'submitScore'],
+				'GET' => [
+					'controller' => $matchController, 
+					'action' => 'editScore'],
+				'login' => true,
+				'permissions' => \Jrpl\Entity\user::EDIT_MATCHES],
+			
 			'match/edit' => [
 				'POST' => [
 					'controller' => $matchController, 
